@@ -88,50 +88,48 @@
 .news-panel {}
 
 .news-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* 리스트 아이템 간 상하 유격 축소 (32px -> 16px) */
-  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* 모바일 기본 1열 (더보기 페이지와 동일) */
+  gap: 12px; /* 모바일 압축 간격 매핑 */
+  margin-bottom: 32px;
 }
 
 /* ===================================
-   뉴스 아이템 — 공통
-   이미지가 항상 글 앞에 위치
+   뉴스 아이템 — 더보기 페이지 가로형 카드 스타일 복제
    =================================== */
 .news-item {
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 18px;
+  padding: 8px 10px;
   display: flex;
+  gap: 20px;
   align-items: center;
-  gap: 32px;
-  padding: 8px 8px; /* 상하 패딩을 16px에서 8px로 전격 인하하여 세로 두께 압축 */
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-base);
-  background-color: var(--color-bg-white);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  min-width: 0; /* 부모 내에서 말줄임표 발동 보장 */
 }
 
 .news-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  transform: translateY(-2px);
-  background-color: var(--color-bg-white);
-  padding-left: 12px;
-  padding-right: 12px;
-  margin: 0;
-  border-radius: var(--radius-base);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  border-color: #cccccc;
+  background-color: #ffffff; /* 호버 시 배경 유지 */
 }
 
-/* 이미지 슬롯 — 모바일(기본): 글 앞, 이미지 크기를 80px에서 135px로 확장 */
+/* 이미지 슬롯 — 더보기 페이지 썸네일 박스 복제 */
 .news-image-slot {
-  flex: 0 0 135px;
+  width: 140px;
   height: 95px;
-  background-color: var(--color-bg-light);
-  border-radius: var(--radius-base);
-  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f3f4f6;
+  flex-shrink: 0;
+  order: -1;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  order: -1;
-  /* 항상 제일 앞 */
 }
 
 .news-image-placeholder-text {
@@ -151,40 +149,43 @@
 }
 
 .news-item:hover .news-image-content {
-  transform: scale(1.05);
+  transform: scale(1.06); /* 호버 효과 통일 */
 }
 
 .news-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
 .news-title {
-  font-size: 16px; /* 모바일 디바이스에 최적화된 가독성 높은 스케일 */
+  font-size: 16px;
   font-weight: var(--font-weight-extrabold);
-  margin-bottom: 6px;
-  color: var(--color-text-main);
+  color: #111111;
+  margin: 0 0 6px 0;
   line-height: 1.4;
+  white-space: nowrap;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .news-desc {
-  font-size: 13px; /* 모바일 썸네일 크기에 호응하는 담백한 본문 크기 */
-  color: var(--color-text-muted);
-  margin-bottom: 10px;
+  font-size: 13px;
+  color: #666666;
+  margin: 0 0 12px 0;
   line-height: 1.5;
-  overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .news-date {
-  font-size: var(--font-size-caption);
-  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  color: #999999;
 }
 
 /* ===================================
@@ -201,7 +202,7 @@
   border-radius: var(--radius-base);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
-  border: 1px solid var(--color-border);
+  border: 1px solid #dadada;
   background-color: var(--color-bg-white);
   color: var(--color-text-main);
   transition: all 0.2s ease;
@@ -216,59 +217,49 @@
 }
 
 /* ===================================
-   태블릿 (768px 이상): 이미지 크기 키우기
+   ★ 태블릿 (768px 이상) 반응형 동기화
    =================================== */
 @media (min-width: 768px) {
-  .news-image-slot {
-    flex: 0 0 180px;
-    height: 120px;
-  }
-
   .news-item {
-    align-items: flex-start;
-    gap: 64px;
-    padding: 28px 20px;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
   }
 
-  .news-item:hover {
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0;
+  .news-image-slot {
+    width: 160px;
+    height: 110px;
   }
 
   .news-title {
-    font-size: 20px; /* 과도하게 컸던 32px 스케일을 태블릿 수준에 맞게 하향 평준화 */
-    -webkit-line-clamp: 2;
+    font-size: 18px;
   }
 
   .news-desc {
     font-size: 14px;
-    -webkit-line-clamp: 2;
   }
 }
 
 /* ===================================
-   데스크탑 (1024px 이상): 이미지 더 크게
+   ★ 데스크탑 (1024px 이상) 반응형 동기화
    =================================== */
 @media (min-width: 1024px) {
-  .news-image-slot {
-    flex: 0 0 240px;
-    height: 160px;
+  .news-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 메인 페이지도 데스크톱 2열 대칭 그리드 적용! */
+    gap: 24px;
   }
 
-  .news-item {
-    gap: 64px;
-    padding: 16px 16px;
+  .news-image-slot {
+    width: 180px;
+    height: 120px;
   }
 
   .news-title {
-    font-size: 22px; /* 대화면 시인성을 확보하는 프리미엄 헤드라인 스케일 */
-    margin-bottom: 12px;
+    font-size: 20px;
+    margin: 0 0 6px 0;
   }
 
   .news-desc {
     font-size: 15px;
-    -webkit-line-clamp: 2;
-    margin-bottom: 14px;
   }
 }

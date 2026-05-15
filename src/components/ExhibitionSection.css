@@ -49,7 +49,9 @@
 .slider-viewport {
   overflow: hidden;
   width: 100%;
-  margin-bottom: 32px;
+  /* 호버 시 카드가 솟아오를 때 상단 경계선이 짤리는 현상을 방지하기 위해 상하 안전 여백 주입 */
+  padding: 12px 0;
+  margin: -12px 0 20px 0; 
 }
 
 .cards-slider {
@@ -76,34 +78,41 @@
 }
 
 .exhibition-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
+  background-color: transparent; /* 배경 제거 */
+  border-radius: 20px;
   overflow: hidden;
-  background-color: var(--color-bg-white);
+  border: 1px solid #dddddd; /* 배경색(white)보다 한 단계 진한 테두리 부여 */
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   height: 100%;
   max-width: 500px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+}
+
+.exhibition-card:hover {
+  transform: translateY(-6px);
+  border-color: #bbbbbb; /* 호버 시 테두리를 더욱 선명하게 변모 */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
 }
 
 .card-image-placeholder {
   width: 100%;
-  height: 300px;
-  background-color: var(--color-bg-light);
+  aspect-ratio: 16 / 10;
+  background-color: #e5e7eb;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-text-muted);
   font-size: var(--font-size-caption);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .card-image-wrapper {
   width: 100%;
-  height: 300px;
+  aspect-ratio: 16 / 10; /* 가로 세로 비율 완벽 통일 */
   overflow: hidden;
-  border-bottom: 1px solid var(--color-border);
+  background-color: #e5e7eb;
+  position: relative;
 }
 
 .card-image {
@@ -114,7 +123,7 @@
 }
 
 .exhibition-card:hover .card-image {
-  transform: scale(1.05);
+  transform: scale(1.05); /* 줌 효과 완벽 복제 */
 }
 
 .card-content {
@@ -125,25 +134,25 @@
 }
 
 .card-title {
-  font-size: var(--font-size-h2);
+  font-size: 18px; /* 헤드라인 스펙 완벽 일치 */
   font-weight: var(--font-weight-extrabold);
-  margin-bottom: 12px;
-  color: var(--color-text-main);
+  margin-bottom: 8px;
+  color: #111111;
 }
 
 .card-desc {
-  font-size: var(--font-size-body);
-  color: var(--color-text-muted);
-  margin-bottom: 16px;
+  font-size: 14px; /* 본문 내용 규격 일치 */
+  color: #6b7280;
   line-height: 1.5;
+  margin-bottom: 14px;
   flex: 1;
 }
 
 .card-period {
-  font-size: var(--font-size-caption);
-  color: var(--color-text-main);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: 24px;
+  font-size: 13px; /* 기간 표시 규격 일치 */
+  font-weight: var(--font-weight-bold);
+  color: #9ca3af;
+  margin-bottom: 20px;
 }
 
 .card-actions {
@@ -153,39 +162,35 @@
 
 .action-btn {
   flex: 1;
-  padding: 12px 0;
-  border-radius: var(--radius-base);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-bold);
+  padding: 16px 0; /* 더보기 페이지 CTA 높이 스펙(16px) 복제 */
+  border-radius: 12px; /* 버튼 곡률 12px 일원화 */
+  font-size: 15px;
+  font-weight: var(--font-weight-extrabold);
   text-align: center;
-  border: 1px solid var(--color-border);
-  transition: all 0.25s ease;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
 }
 
 .action-btn.primary {
   background-color: #111111;
   color: #ffffff;
-  border-color: #111111;
+}
+
+.action-btn.primary:hover {
+  background-color: #333333;
+  transform: scale(0.98); /* 클릭 유도 시 살짝 눌리는 고급 피드백 */
 }
 
 .action-btn.secondary {
-  background-color: #ffffff;
-  color: #111111;
+  border: 1px solid #dedede;
+  background-color: #ffffff; /* 프리미엄 디자인을 해치던 구식 테두리 버튼 대신, 담백한 라이트 그레이 베이스 기용 */
+  color: #4b5563;
 }
 
-/* 검은색 버튼 호버: 밝기 향상 */
-.action-btn.primary:hover, .action-btn.primary:focus-visible {
-  background-color: #333333;
-  border-color: #333333;
-  opacity: 1;
-}
-
-/* 흰색 버튼 호버: 밝기 더 낮춤 & 흰색 테두리 표출 */
-.action-btn.secondary:hover, .action-btn.secondary:focus-visible {
-  background-color: #888888;
-  color: #ffffff;
-  border-color: #ffffff;
-  opacity: 1;
+.action-btn.secondary:hover {
+  background-color: #e5e7eb;
+  transform: scale(0.98);
 }
 
 /* 슬라이더 컨트롤러 스타일 */
