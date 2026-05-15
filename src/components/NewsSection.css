@@ -160,9 +160,9 @@
 }
 
 .news-title {
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: 8px;
+  font-size: 16px; /* 모바일 디바이스에 최적화된 가독성 높은 스케일 */
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: 6px;
   color: var(--color-text-main);
   line-height: 1.4;
   overflow: hidden;
@@ -172,7 +172,7 @@
 }
 
 .news-desc {
-  font-size: var(--font-size-body);
+  font-size: 13px; /* 모바일 썸네일 크기에 호응하는 담백한 본문 크기 */
   color: var(--color-text-muted);
   margin-bottom: 10px;
   line-height: 1.5;
@@ -237,11 +237,12 @@
   }
 
   .news-title {
-    font-size: 32px;
+    font-size: 20px; /* 과도하게 컸던 32px 스케일을 태블릿 수준에 맞게 하향 평준화 */
     -webkit-line-clamp: 2;
   }
 
   .news-desc {
+    font-size: 14px;
     -webkit-line-clamp: 2;
   }
 }
@@ -261,11 +262,12 @@
   }
 
   .news-title {
-    font-size: 22px;
+    font-size: 22px; /* 대화면 시인성을 확보하는 프리미엄 헤드라인 스케일 */
     margin-bottom: 12px;
   }
 
   .news-desc {
+    font-size: 15px;
     -webkit-line-clamp: 2;
     margin-bottom: 14px;
   }

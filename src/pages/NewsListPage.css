@@ -255,6 +255,14 @@
     height: 120px;
   }
 
+  .media-title {
+    font-size: 20px; /* 대화면에서 헤드라인 시인성 확보를 위한 점진적 스케일업 */
+  }
+
+  .media-desc {
+    font-size: 15px;
+  }
+
   /* 텍스트 스택은 정갈하게 유지하되 좌우 여백 추가 확보 가능 */
   .news-text-stack {
     gap: 14px;
