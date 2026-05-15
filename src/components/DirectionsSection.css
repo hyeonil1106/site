@@ -36,6 +36,30 @@
   margin-bottom: 16px;
 }
 
+/* 추가된 이미지 아이콘 스타일 조율 */
+.imgMap,
+.imgBus,
+.imgTrain,
+.imgCar {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.direction-card .imgMap,
+.direction-card .imgBus {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+}
+
+.guide-item .imgBus,
+.guide-item .imgTrain,
+.guide-item .imgCar {
+  width: 36px;
+  height: 36px;
+  margin-top: 2px; /* 텍스트 최상단 타이틀과 가로 축 매칭 */
+}
+
 .direction-title {
   font-size: var(--font-size-h2);
   font-weight: var(--font-weight-bold);

@@ -78,9 +78,10 @@
 }
 
 .close-icon {
-  font-size: 20px;
-  color: var(--color-text-main);
-  font-weight: 300;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* 4. 드로어 바디 및 스크롤 영역 */

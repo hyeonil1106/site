@@ -74,6 +74,13 @@
   transform: translateY(-2px);
 }
 
+.page-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 /* 로고 */
 .login-logo {
   margin: 0 auto;

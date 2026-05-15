@@ -118,9 +118,10 @@
 }
 
 .down-chevron-icon {
-  font-size: 10px;
-  color: #666666;
-  transform: scaleY(0.75);
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* 4. ★ 초고도화: '위에서 아래로' 쏟아지는 커튼 퀵 피커 패널 */

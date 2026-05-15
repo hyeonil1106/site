@@ -48,3 +48,11 @@
   margin-left: 8px;
   font-weight: bold;
 }
+
+.page2-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
