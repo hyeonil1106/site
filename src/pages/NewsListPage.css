@@ -32,7 +32,7 @@
 .news-media-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr); /* 모바일 기본 1열 (텍스트 넘침 방지) */
-  gap: 20px;
+  gap: 12px; /* 카드 간 상하 간격을 20px에서 12px로 축소 */
 }
 
 /* 가로형 프리미엄 미디어 카드 */
@@ -40,7 +40,7 @@
   background-color: #ffffff;
   border: 1px solid #eaeaea;
   border-radius: 18px;
-  padding: 12px 10px; /* 외곽 블록과 이미지 경계 사이의 공백(Padding) 단축 */
+  padding: 8px 10px; /* 상하 패딩을 12px에서 8px로 더 긴밀하게 압축 */
   display: flex;
   gap: 20px; /* 텍스트와 이미지 사이의 간격(Gap) 원본 유지 */
   align-items: center;
