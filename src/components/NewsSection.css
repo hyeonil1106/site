@@ -102,7 +102,7 @@
   display: flex;
   align-items: center;
   gap: 32px;
-  padding: 8px 12px; /* 상하 패딩을 16px에서 8px로 전격 인하하여 세로 두께 압축 */
+  padding: 8px 8px; /* 상하 패딩을 16px에서 8px로 전격 인하하여 세로 두께 압축 */
   border: 1px solid var(--color-border);
   border-radius: var(--radius-base);
   background-color: var(--color-bg-white);
