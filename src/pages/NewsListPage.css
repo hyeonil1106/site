@@ -40,9 +40,9 @@
   background-color: #ffffff;
   border: 1px solid #eaeaea;
   border-radius: 18px;
-  padding: 16px;
+  padding: 12px 10px; /* 외곽 블록과 이미지 경계 사이의 공백(Padding) 단축 */
   display: flex;
-  gap: 20px;
+  gap: 20px; /* 텍스트와 이미지 사이의 간격(Gap) 원본 유지 */
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -56,10 +56,10 @@
   border-color: #cccccc;
 }
 
-/* 가로형 카드 썸네일박스 */
+/* 가로형 카드 썸네일박스 (모바일 시인성 개선: 120px -> 140px로 확대) */
 .media-thumb-box {
-  width: 120px;
-  height: 90px;
+  width: 140px;
+  height: 95px;
   border-radius: 12px;
   overflow: hidden;
   background-color: #f3f4f6;

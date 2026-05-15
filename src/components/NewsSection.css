@@ -102,7 +102,7 @@
   display: flex;
   align-items: center;
   gap: 32px;
-  padding: 20px 16px;
+  padding: 16px 12px; /* 외곽 블록과 이미지 사이의 패딩 간격을 16px에서 12px로 줄임 */
   border: 1px solid var(--color-border);
   border-radius: var(--radius-base);
   background-color: var(--color-bg-white);
@@ -113,17 +113,16 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
   transform: translateY(-2px);
   background-color: var(--color-bg-white);
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
   margin: 0;
   border-radius: var(--radius-base);
 }
 
-/* 이미지 슬롯 — 모바일(기본): 글 앞, 작은 크기 */
+/* 이미지 슬롯 — 모바일(기본): 글 앞, 이미지 크기를 80px에서 135px로 확장 */
 .news-image-slot {
-  flex: 0 0 80px;
-  width: 200px;
-  height: 100px;
+  flex: 0 0 135px;
+  height: 95px;
   background-color: var(--color-bg-light);
   border-radius: var(--radius-base);
   border: 1px solid var(--color-border);
