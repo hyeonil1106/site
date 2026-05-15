@@ -7,6 +7,7 @@ const SearchBar = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isDesktopSuggestOpen, setIsDesktopSuggestOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : true);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const containerRef = useRef(null);
   const navigate = useNavigate();
 
@@ -17,9 +18,16 @@ const SearchBar = () => {
   ];
 
   const handleRecommendClick = (path) => {
-    navigate(path);
-    setIsDesktopSuggestOpen(false);
-    setIsPopupOpen(false);
+    if (path === '/exhibitions') {
+      navigate(path);
+      setIsDesktopSuggestOpen(false);
+      setIsPopupOpen(false);
+    } else {
+      // 준비중인 페이지(/cs, /about 등) 차단 후 팝업 노출
+      setIsDesktopSuggestOpen(false);
+      setIsPopupOpen(false);
+      setIsAlertOpen(true);
+    }
   };
 
   useEffect(() => {
@@ -145,6 +153,21 @@ const SearchBar = () => {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+      )}
+      {/* 현재 준비중 알림 공통 팝업 */}
+      {isAlertOpen && (
+        <div className="alert-overlay" onClick={() => setIsAlertOpen(false)}>
+          <div className="alert-box" onClick={(e) => e.stopPropagation()}>
+            <p className="alert-message">현재 준비중인 서비스입니다.</p>
+            <button 
+              type="button" 
+              className="btn-alert-confirm" 
+              onClick={() => setIsAlertOpen(false)}
+            >
+              확인
+            </button>
           </div>
         </div>
       )}
