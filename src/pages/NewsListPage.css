@@ -31,7 +31,7 @@
 
 .news-media-grid {
   display: grid;
-  grid-template-columns: 1fr; /* 모바일 기본 1열 */
+  grid-template-columns: minmax(0, 1fr); /* 모바일 기본 1열 (텍스트 넘침 방지) */
   gap: 20px;
 }
 
@@ -47,6 +47,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  min-width: 0; /* 부모 유연 너비 내에서 무한확장을 방지하여 텍스트 말줄임표 작동 보장 */
 }
 
 .news-media-row-card:hover {
@@ -241,7 +242,7 @@
 @media (min-width: 1024px) {
   /* 뉴스 미디어 탭일 경우: 데스크톱에서 2열 배포로 그리드 풍성성 부여! */
   .news-media-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2열 가로 그리드 배포 */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 가로 그리드 배포 (좌우 너비 완벽 균등 및 대칭 보장) */
     gap: 24px;
   }
   
