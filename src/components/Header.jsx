@@ -13,41 +13,41 @@ const MENU_DATA = [
     title: '전시',
     path: '/exhibitions', // 수정: 이전에 추가했던 전시 리스트 주소 매핑
     subItems: [
-      { label: '현재전시', href: '#current-exhibition' },
-      { label: '예전전시', href: '#past-exhibition-1' },
-      { label: '지난전시', href: '#past-exhibition-2' },
-      { label: '온라인전시', href: '#online-exhibition' },
+      { label: '현재전시', href: '/exhibitions' },
+      { label: '예전전시', href: '/exhibitions' },
+      { label: '지난전시', href: '/exhibitions' },
+      { label: '온라인전시', href: '/exhibitions' },
     ],
   },
   {
     title: '예약내역',
     path: '#', // 단독 예약 페이지 제거됨
     subItems: [
-      { label: '예약확인', href: '#check-reservation' },
-      { label: '사전예약', href: '#pre-reservation' },
-      { label: '단체예약', href: '#group-reservation' },
-      { label: '전시관대여', href: '#hall-rental' },
-      { label: '예약취소', href: '#cancel-reservation' },
+      { label: '예약확인', href: '#' },
+      { label: '사전예약', href: '#' },
+      { label: '단체예약', href: '#' },
+      { label: '전시관대여', href: '#' },
+      { label: '예약취소', href: '#' },
     ],
   },
   {
     title: '교육·문화',
-    path: '/education',
+    path: '#',
     subItems: [
-      { label: '교육프로그램', href: '#edu-program' },
-      { label: '문화프로그램', href: '#culture-program' },
-      { label: '프로그램 일정', href: '#program-schedule' },
-      { label: '자원봉사', href: '#volunteer' },
-      { label: '갤러리', href: '#gallery' },
+      { label: '교육프로그램', href: '#' },
+      { label: '문화프로그램', href: '#' },
+      { label: '프로그램 일정', href: '#' },
+      { label: '자원봉사', href: '#' },
+      { label: '갤러리', href: '#' },
     ],
   },
   {
     title: '미술관소개',
-    path: '/about',
+    path: '#',
     subItems: [
-      { label: '시설안내', href: '#facility-guide' },
-      { label: '요금안내', href: '#fee-guide' },
-      { label: '미술관위치', href: '#museum-location' },
+      { label: '시설안내', href: '#' },
+      { label: '요금안내', href: '#' },
+      { label: '미술관위치', href: '#' },
     ],
   },
 ];
@@ -55,14 +55,18 @@ const MENU_DATA = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // 터치 및 클릭 시 토글 동작 핸들러
-  const handleMenuClick = () => {
-    // 사용자가 메뉴를 직접 클릭한 경우, 즉시 페이지 이동을 허용하며 드롭다운은 닫습니다.
+  // 링크 클릭 가로채기 핸들러
+  const handleLinkIntercept = (path, e) => {
+    if (path === '#') {
+      e.preventDefault();
+      setIsAlertOpen(true);
+    }
     setActiveDropdown(null);
   };
 
@@ -95,7 +99,7 @@ const Header = () => {
                     <Link 
                       to={menu.path} 
                       className="top-menu-item"
-                      onClick={(e) => handleMenuClick(index, e)}
+                      onClick={(e) => handleLinkIntercept(menu.path, e)}
                     >
                       {menu.title}
                     </Link>
@@ -106,9 +110,9 @@ const Header = () => {
                         {menu.subItems.map((sub, sIdx) => (
                           <li key={sIdx} className="submenu-item">
                             <Link 
-                              to={`${menu.path}${sub.href}`} 
+                              to={sub.href} 
                               className="submenu-link"
-                              onClick={handleMenuClick}
+                              onClick={(e) => handleLinkIntercept(sub.href, e)}
                             >
                               {sub.label}
                             </Link>
@@ -147,7 +151,30 @@ const Header = () => {
       </header>
 
       {/* 전체 메뉴 드로어 컴포넌트 */}
-      <MenuDrawer isOpen={isMenuOpen} onClose={toggleMenu} />
+      <MenuDrawer 
+        isOpen={isMenuOpen} 
+        onClose={toggleMenu} 
+        onAlert={() => {
+          setIsMenuOpen(false);
+          setIsAlertOpen(true);
+        }}
+      />
+
+      {/* 현재 준비중 알림 커스텀 팝업 */}
+      {isAlertOpen && (
+        <div className="alert-overlay" onClick={() => setIsAlertOpen(false)}>
+          <div className="alert-box" onClick={(e) => e.stopPropagation()}>
+            <p className="alert-message">현재 준비중인 서비스입니다.</p>
+            <button 
+              type="button" 
+              className="btn-alert-confirm" 
+              onClick={() => setIsAlertOpen(false)}
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

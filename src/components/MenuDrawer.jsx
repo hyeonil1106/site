@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './MenuDrawer.css';
 import imgClose from '../assets/close.png';
 
-const MenuDrawer = ({ isOpen, onClose }) => {
+const MenuDrawer = ({ isOpen, onClose, onAlert }) => {
   // 현재 오픈된 아코디언 섹션 상태 관리 (초기값: null - 모두 닫힌 상태)
   const [activeSection, setActiveSection] = useState(null);
 
@@ -67,7 +67,15 @@ const MenuDrawer = ({ isOpen, onClose }) => {
             <div className="accordion-content">
               <ul className="sub-menu-list">
                 <li><Link to="/login" className="sub-menu-link" onClick={onClose}>로그인</Link></li>
-                <li><a href="#signup" className="sub-menu-link">회원가입</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    회원가입
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -85,9 +93,33 @@ const MenuDrawer = ({ isOpen, onClose }) => {
             </button>
             <div className="accordion-content">
               <ul className="sub-menu-list">
-                <li><a href="#my-reservation" className="sub-menu-link">나의예약</a></li>
-                <li><a href="#group-reservation" className="sub-menu-link">단체관람예약</a></li>
-                <li><a href="#nonmember-reservation" className="sub-menu-link">비회원예약</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    나의예약
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    단체관람예약
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    비회원예약
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -105,9 +137,25 @@ const MenuDrawer = ({ isOpen, onClose }) => {
             </button>
             <div className="accordion-content">
               <ul className="sub-menu-list">
-                <li><a href="#news" className="sub-menu-link">새소식</a></li>
-                <li><a href="#faq" className="sub-menu-link">자주묻는 질문</a></li>
-                <li><a href="#survey" className="sub-menu-link">설문조사</a></li>
+                <li><Link to="/news" className="sub-menu-link" onClick={onClose}>새소식</Link></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    자주묻는 질문
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    설문조사
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -125,7 +173,15 @@ const MenuDrawer = ({ isOpen, onClose }) => {
             </button>
             <div className="accordion-content">
               <ul className="sub-menu-list">
-                <li><a href="#archive" className="sub-menu-link">아카이브</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    아카이브
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -143,14 +199,78 @@ const MenuDrawer = ({ isOpen, onClose }) => {
             </button>
             <div className="accordion-content">
               <ul className="sub-menu-list">
-                <li><a href="#greetings" className="sub-menu-link" onClick={onClose}>인사말</a></li>
-                <li><a href="#history" className="sub-menu-link" onClick={onClose}>연혁</a></li>
-                <li><a href="#mission" className="sub-menu-link" onClick={onClose}>미션</a></li>
-                <li><a href="#ci" className="sub-menu-link" onClick={onClose}>CI</a></li>
-                <li><a href="#organization" className="sub-menu-link" onClick={onClose}>조직도</a></li>
-                <li><a href="#facility" className="sub-menu-link" onClick={onClose}>시설현황·대관안내</a></li>
-                <li><a href="#gwanggyo" className="sub-menu-link" onClick={onClose}>수원시립아트스페이스광교</a></li>
-                <li><a href="#kids" className="sub-menu-link" onClick={onClose}>수원시립어린이미술체험관</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    인사말
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    연혁
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    미션
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    CI
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    조직도
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    시설현황·대관안내
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    수원시립아트스페이스광교
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="sub-menu-link" 
+                    onClick={(e) => { e.preventDefault(); onAlert(); }}
+                  >
+                    수원시립어린이미술체험관
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
