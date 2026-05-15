@@ -1,0 +1,142 @@
+.main-visual {
+  width: 100%;
+  background-color: var(--color-bg-light);
+  overflow: hidden;
+}
+
+.visual-content {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.visual-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.visual-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);
+  z-index: 2;
+}
+
+.visual-info {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  color: var(--color-white);
+}
+
+.info-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-white);
+  border-radius: 20px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 16px;
+}
+
+.visual-title {
+  font-size: 48px;
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+}
+
+.visual-desc {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.visual-date {
+  font-size: var(--font-size-body);
+  margin-bottom: 32px;
+  opacity: 0.8;
+}
+
+.visual-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.action-button {
+  padding: 12px 24px;
+  border-radius: var(--radius-large);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  min-width: 160px;
+}
+
+.action-button.primary {
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  transition: all 0.25s ease;
+}
+
+.action-button.secondary {
+  background-color: #ffffff;
+  color: #111111;
+  border: 1px solid #dddddd;
+  transition: all 0.25s ease;
+}
+
+.action-button:hover, .action-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+/* 검은색 버튼: 호버 시 밝기 향상 */
+.action-button.primary:hover, .action-button.primary:focus-visible {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+/* 흰색 버튼: 호버 시 밝기 더 낮춤 & 흰색 테두리 표출 */
+.action-button.secondary:hover, .action-button.secondary:focus-visible {
+  background-color: #888888;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .visual-content {
+    height: 400px;
+  }
+  .visual-info {
+    padding: 0 24px;
+  }
+  .visual-title {
+    font-size: 32px;
+  }
+  .visual-desc {
+    font-size: 18px;
+  }
+  .visual-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .action-button {
+    width: 100%;
+  }
+}

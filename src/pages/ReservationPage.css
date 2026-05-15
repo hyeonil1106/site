@@ -1,0 +1,539 @@
+/* =====================================================
+   단독 상세 예약 페이지 (Reservation Sub Page) CSS
+   ===================================================== */
+
+.sub-page-wrapper.reserve-page {
+  min-height: 100vh;
+  background-color: #f0f2f5; /* 살짝 더 짙은 그레이로 카드 입체감 강조 */
+  color: #111111;
+  display: flex;
+  flex-direction: column;
+}
+
+.reserve-content-container {
+  flex: 1;
+  width: 100%;
+  max-width: 480px; /* 피그마 스마트폰 비율로 가로폭 제한 */
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 1. 페이지 대제목 */
+.page-title-area {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.page-main-title {
+  font-size: 20px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+  letter-spacing: -0.3px;
+}
+
+/* 2. ★ 핵심: 피그마 1:1 고증 스마트 카드 */
+.booking-smart-card {
+  background-color: #ffffff;
+  border-radius: 28px; /* 매우 동그란 모던 모서리 곡률 */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  position: relative; /* 드롭다운 피커의 기준점 */
+  display: flex;
+  flex-direction: column;
+  animation: cardPopUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 3. 카드 내부 헤더 / 날짜 조작 트리거 */
+.card-calendar-trigger-row {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f3f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 200; /* 피커보다 높게 포지셔닝 */
+  position: relative;
+}
+
+.card-calendar-trigger-row:hover {
+  background-color: #f9fafb;
+}
+
+.trigger-label {
+  font-size: 15px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+}
+
+.trigger-anchor {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f1f3f7;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.current-text {
+  font-size: 14px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+}
+
+.arrow-icon {
+  font-size: 8px;
+  color: #666;
+  transform: scaleY(0.8);
+}
+
+/* 4. 카드 바인딩형 탑-다운 드롭 피커 */
+.card-dropdown-picker {
+  position: absolute;
+  top: 64px; /* 트리거 로우 바로 아래 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+}
+
+.card-dropdown-picker.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* 피커 내부 레이아웃 */
+.picker-header-mini {
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.picker-header-mini h4 {
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: #333;
+}
+
+.btn-close-mini {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.picker-content-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.column-head {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  padding: 8px 0;
+  background-color: #fafafa;
+  font-weight: bold;
+}
+
+.column-year {
+  width: 100px;
+  border-right: 1px solid #f1f3f5;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-year .scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  scrollbar-width: none;
+}
+.column-year .scroll-area::-webkit-scrollbar { display: none; }
+
+.year-item-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.year-item-btn.active {
+  background-color: #f0f2f5;
+  color: #111;
+  font-weight: bold;
+}
+
+.column-month {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-month .grid-area {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 12px;
+}
+
+.month-item-btn {
+  border: none;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+
+.month-item-btn.active {
+  background-color: var(--color-primary);
+  color: #fff;
+  transform: scale(1.02);
+}
+
+.picker-footer-row {
+  display: flex;
+  border-top: 1px solid #f1f3f5;
+}
+
+.btn-pick-cancel, .btn-pick-confirm {
+  flex: 1;
+  border: none;
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-extrabold);
+  cursor: pointer;
+}
+
+.btn-pick-cancel {
+  background-color: #ffffff;
+  color: #888;
+  border-right: 1px solid #f1f3f5;
+}
+
+.btn-pick-confirm {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+/* 5. 캘린더 본체 그리드 */
+.card-calendar-section {
+  padding: 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.calendar-month-banner {
+  font-size: 18px;
+  font-weight: var(--font-weight-extrabold);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.calendar-labels {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.calendar-labels span {
+  font-size: 13px;
+  font-weight: bold;
+  color: #0a1128;
+}
+
+.calendar-grid-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 8px;
+}
+
+.day-cell-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day-number-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-number-btn:hover {
+  background-color: #f1f3f5;
+}
+
+.day-number-btn.active {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+/* 6. 인원 설정 박스 */
+.card-people-section {
+  padding: 16px 24px;
+  background-color: #f9fafb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.section-label {
+  font-size: 14px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+}
+
+.counter-panel {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 2px;
+}
+
+.btn-adj {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-adj:hover:not(:disabled) {
+  background-color: #f1f3f5;
+  border-radius: 50%;
+}
+
+.btn-adj:disabled {
+  opacity: 0.3;
+}
+
+.count-num {
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* 7. 피그마 시간대 선택 (다크 테마 해제) */
+.card-time-section {
+  background-color: #f9fafb; /* 인원수 설정 부분의 배경색 #f9fafb 와 동일화 */
+  padding: 24px;
+  color: #111111;
+}
+
+.time-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  color: #111111;
+}
+
+.time-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.time-chip {
+  background-color: #ffffff; /* 기본: 흰색 배경 */
+  color: #111111; /* 기본: 검정 글씨 */
+  border: 1px solid #111111; /* 기본: 검정 테두리 */
+  border-radius: 20px;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.time-chip:hover {
+  transform: translateY(-1px);
+  background-color: #f0f2f5;
+}
+
+.time-chip.active {
+  background-color: #111111; /* 활성화 시: 검정 배경 */
+  color: #ffffff; /* 활성화 시: 흰색 글자 */
+  border-color: #111111;
+  transform: scale(0.96);
+}
+
+/* 8. 서머리 바 및 최종 CTA 푸터 */
+.card-footer-cta {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.cta-summary-row {
+  padding: 14px 24px;
+  background-color: #eef2f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  border-top: 1px solid #dbe3eb;
+}
+
+.summary-badge {
+  background-color: #111;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.summary-info {
+  font-weight: bold;
+  color: #333;
+}
+
+.btn-submit-booking {
+  background-color: #111111;
+  border: none;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: var(--font-weight-extrabold);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-submit-booking:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* 9. 카드형 성공 뷰 */
+.card-success-view {
+  padding: 50px 24px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #f0fdf4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.4s;
+}
+
+.icon-party {
+  font-size: 54px;
+  margin-bottom: 16px;
+  animation: jump 1s infinite alternate;
+}
+
+.card-success-view h3 {
+  font-size: 20px;
+  font-weight: var(--font-weight-extrabold);
+  color: #166534;
+  margin-bottom: 16px;
+}
+
+.success-info-card {
+  background-color: rgba(255,255,255,0.9);
+  border: 1px solid #bbf7d0;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.title-txt { font-weight: var(--font-weight-extrabold); margin-bottom: 8px; color: #111; }
+.dt-txt { font-size: 14px; color: #444; margin-bottom: 4px; }
+.tm-txt { font-size: 14px; color: #16a34a; font-weight: bold; }
+.guide-txt { font-size: 12px; color: #777; }
+
+.btn-go-main {
+  width: 100%;
+  background-color: #111111;
+  border: none;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: var(--font-weight-extrabold);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+.btn-go-main:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+@keyframes cardPopUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes jump {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+/* 모바일 미디어 쿼리 대응 */
+@media (max-width: 480px) {
+  .reserve-content-container {
+    padding: 12px 12px 40px;
+  }
+  .booking-smart-card {
+    border-radius: 20px;
+  }
+  .time-grid-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

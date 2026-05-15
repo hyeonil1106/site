@@ -1,0 +1,242 @@
+/* 1. 배경 딤 오버레이 */
+.menu-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 은은하게 어두운 배경 */
+  backdrop-filter: blur(1px); /* 미려함을 더해주는 블러 처리 */
+  z-index: 999; /* 헤더보다 무조건 높게 */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.menu-drawer-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 2. 우측에서 미끄러져 나오는 드로어 본체 */
+.menu-drawer-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh; /* 뷰포트 전체 높이 */
+  height: 100dvh; /* 모바일 동적 뷰포트 최적화 */
+  width: 100%;
+  max-width: 400px; /* 데스크톱/태블릿에서의 고정 너비 */
+  background-color: var(--color-bg-white);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 내부 헤더/바디 영역 외 이탈 금지 */
+  transform: translateX(100%); /* 오른쪽 밖으로 숨김 */
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.menu-drawer-content.active {
+  transform: translateX(0); /* 화면 안으로 진입 */
+}
+
+/* 3. 드로어 내부 상단 헤더 */
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eeeeee;
+  height: var(--header-height);
+}
+
+.text-close {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+}
+
+.btn-close-drawer {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.btn-close-drawer:hover,
+.btn-close-drawer:focus-visible {
+  background-color: var(--color-bg-light);
+}
+
+.close-icon {
+  font-size: 20px;
+  color: var(--color-text-main);
+  font-weight: 300;
+}
+
+/* 4. 드로어 바디 및 스크롤 영역 */
+.drawer-body {
+  flex: 1;
+  min-height: 0; /* Flex 아이템 내부의 스크롤 컨텍스트 형성 */
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+}
+
+/* 5. 아코디언 항목 그룹화 */
+.accordion-item {
+  border: 1px solid #e5e5e5;
+  border-radius: var(--radius-base);
+  background-color: var(--color-bg-white);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-item:hover {
+  border-color: #cccccc;
+}
+
+/* 아코디언 헤더 버튼 */
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  min-height: auto;
+  transition: background-color 0.2s ease;
+}
+
+.accordion-header:hover {
+  background-color: #fafafa;
+}
+
+.header-title {
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+}
+
+/* 아코디언 상태 인디케이터 (+/- 디자인) */
+.toggle-indicator {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 가로 라인 (언제나 노출) */
+.toggle-indicator::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-main);
+  border-radius: 1px;
+}
+
+/* 세로 라인 (닫혀있을 때만 가로 라인을 덮어 '+' 구성) */
+.toggle-indicator::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-text-main);
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* 아코디언이 열리면 세로 라인이 회전하여 겹치면서 투명해짐 -> '-'만 남음 */
+.accordion-item.is-open .toggle-indicator::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+/* 아코디언 서브 메뉴 리스트 바디 */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #fafafa; /* Figma에 가까운 연회색 백그라운드 */
+  border-top: 1px solid transparent;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease;
+}
+
+/* 열린 상태 아코디언 콘텐츠 */
+.accordion-item.is-open .accordion-content {
+  max-height: 600px; /* 8개 이상의 충분한 서브메뉴 수용 가능하도록 완화 */
+  border-color: #eeeeee;
+}
+
+/* 하위 메뉴 목록 스타일 */
+.sub-menu-list {
+  list-style: none;
+  padding: 8px 0;
+}
+
+.sub-menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  min-height: auto;
+  min-width: auto;
+  width: 100%;
+  justify-content: flex-start;
+  transition: all 0.2s ease;
+}
+
+.sub-menu-link:hover,
+.sub-menu-link:focus-visible {
+  color: var(--color-primary);
+  background-color: #f0f0f0;
+  padding-left: 28px; /* 미세한 인덴트 호버 애니메이션 */
+}
+
+/* 6. 모바일(480px 미만) 반응형 처리 */
+@media (max-width: 480px) {
+  .menu-drawer-content {
+    max-width: 100%; /* 화면 전체 너비 차지 */
+    width: 100%;
+  }
+  
+  .drawer-body {
+    padding: 20px;
+    gap: 12px;
+  }
+  
+  .drawer-header {
+    padding: 16px 20px;
+  }
+
+  .accordion-header {
+    padding: 14px 18px;
+  }
+  
+  .sub-menu-link {
+    padding: 10px 22px;
+  }
+  
+  .sub-menu-link:hover {
+    padding-left: 24px;
+  }
+}

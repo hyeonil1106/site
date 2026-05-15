@@ -1,0 +1,109 @@
+/* 디자인 시스템 변수 정의 */
+:root {
+  /* 색상 */
+  --color-primary: #222222;
+  --color-text-main: #222222;
+  --color-text-muted: #666666;
+  --color-bg-white: #ffffff;
+  --color-bg-light: #f5f5f5;
+  --color-white: #ffffff;
+  --color-border: #222222;
+
+  /* 타이포그래피 */
+  --font-family-base: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-size-h1: 24px;
+  --font-size-h2: 20px;
+  --font-size-body: 16px;
+  --font-size-caption: 14px;
+  
+  --font-weight-extrabold: 800;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-regular: 400;
+
+  /* 효과 및 레이아웃 */
+  --radius-large: 16px;
+  --radius-base: 8px;
+  --touch-target: 44px;
+  --header-height: 76px;
+}
+
+/* 기본 리셋 및 접근성 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family-base);
+}
+
+body {
+  background-color: var(--color-bg-white);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  transition: all 0.2s ease;
+}
+
+/* 키보드 포커스 스타일 (접근성) */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 고대비/스크린 리더 전용 텍스트 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+input {
+  font-size: var(--font-size-body); /* 최소 16px (iOS 줌 방지 및 가독성) */
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+/* 공통 서브 페이지 헤더 전용 로고 정렬 규칙 */
+.sub-header-logo {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.sub-header-logo:hover {
+  color: var(--color-text-muted) !important;
+}
+
+.sub-logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sub-header-logo:hover .sub-logo-img {
+  transform: scale(1.1) rotate(-5deg);
+}

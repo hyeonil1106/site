@@ -1,0 +1,58 @@
+name: Deploy React Vite to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+# GITHUB_TOKEN에 대한 권한 설정 (GitHub Pages 배포에 필요)
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 하나의 배포만 진행되도록 동시성 설정
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci # package-lock.json을 기준으로 의존성 설치
+
+      - name: Build
+        # GitHub Pages의 서브패스 문제를 해결하기 위해 빌드 시 base 경로를 repository 이름으로 주입합니다.
+        # 만약 커스텀 도메인을 사용하신다면 --base=/ 옵션을 제거하거나 수정하십시오.
+        run: npm run build -- --base=/${{ github.event.repository.name }}/
+
+      - name: Create 404.html for SPA Routing
+        # React Router의 BrowserRouter 사용 시 404 에러 방지를 위해 index.html을 404.html로 복사합니다.
+        run: cp dist/index.html dist/404.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Vite의 기본 빌드 결과물 폴더인 'dist'를 업로드합니다.
+          path: "./dist"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

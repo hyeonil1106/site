@@ -1,0 +1,228 @@
+.header {
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-bg-light);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* 로컬 전용 상수 변수 */
+  --submenu-cell-height: 48px;
+}
+
+.header-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-area a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--touch-target);
+}
+
+/* 전용 로고 이미지 규격 정의 */
+.main-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+
+.logo-text {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-main);
+  letter-spacing: -0.5px;
+}
+
+/* ==========================================
+   Figma 4단 박스 그리드 메뉴바 & 드롭다운 영역
+   ========================================== */
+
+.top-menu-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Figma 태블릿/데스크톱 시안의 통합 그리드 구조 */
+.top-menu-list {
+  display: flex;
+  list-style: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: var(--color-bg-white);
+  width: 520px; /* 고정 폭을 통해 4등분 균형화 */
+  padding: 0;
+  margin: 0;
+}
+
+.top-menu-item-wrapper {
+  position: relative;
+  flex: 1;
+  border-right: 1px solid #cccccc;
+}
+
+.top-menu-item-wrapper:last-child {
+  border-right: none; /* 마지막 요소 보더 제거 */
+}
+
+.top-menu-item {
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* 호버 혹은 드롭다운 오픈(is-active) 시 강조 효과 */
+.top-menu-item:hover,
+.top-menu-item-wrapper.is-active .top-menu-item {
+  background-color: #111111;
+  color: #fff;
+}
+
+/* Figma 4단 팝업 서브메뉴 박스 */
+.top-submenu {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: -1px; /* 부모 보더라인 정렬 */
+  width: calc(100% + 2px); /* 부모 보더를 감싸도록 크기 조정 */
+  background-color: var(--color-bg-white);
+  border: 1px solid #bbbbbb;
+  border-top: none;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* 애니메이션을 고려한 초기 상태: 위로 수축 및 숨김 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.25s ease;
+}
+
+/* 활성화(.show) 시 부드럽게 전개 */
+.top-submenu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.submenu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.submenu-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--submenu-cell-height);
+  width: 100%;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-white);
+  transition: all 0.18s ease;
+}
+
+/* 펼쳐진 목록 내부 서브 항목 호버 */
+.submenu-link:hover,
+.submenu-link:focus-visible {
+  background-color: #111111;
+  color: #ffffff;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Figma 특유의 높이 맞춤용 다크 네이비 마감 블록 */
+.submenu-filler-block {
+  width: 100%;
+  background-color: #222; /* 은은하고 차분한 피그마 풍 다크 네이비 */
+  border-top: 1px solid #222;
+}
+
+/* ========================================== */
+
+.utility-list {
+  display: flex;
+  list-style: none;
+  gap: 12px;
+}
+
+.utility-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--color-bg-white);
+  cursor: pointer;
+}
+
+.utility-button:hover, .utility-button:focus-visible {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.utility-button:hover .icon1,
+.utility-button:hover .icon3,
+.utility-button:focus-visible .icon1,
+.utility-button:focus-visible .icon3 {
+  filter: brightness(0) invert(1);
+}
+
+.utility-button .icon1,
+.utility-button .icon3 {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+.utility-button .icon {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  /* 타블렛/모바일 분기에서 상단 그리드 메뉴는 숨김(사이드 드로어 대체) */
+  .top-menu-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 20px;
+  }
+  .header-container {
+    padding: 0 12px;
+  }
+}

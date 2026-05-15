@@ -1,0 +1,318 @@
+.search-section {
+  padding: 24px 16px;
+  background-color: var(--color-bg-white);
+}
+
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative; /* 하단 드롭다운 박스 위치의 기준점 설정 */
+}
+
+.search-input-wrapper {
+  display: flex;
+  position: relative;
+  border: 1.5px solid #e2e8f0; /* 너무 검은 테두리를 세련되고 부드러운 실버그레이로 변경 */
+  border-radius: var(--radius-large);
+  overflow: hidden;
+  background-color: var(--color-bg-white);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03); /* 은은한 깊이감 가미 */
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  padding: 16px 20px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-main);
+  outline: none;
+  min-height: 56px;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-submit {
+  padding: 0 24px;
+  background-color: var(--color-bg-white);
+  border-left: 1.5px solid #e2e8f0; /* 테두리 굵기 및 색 조율 */
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.search-submit img.icon2 {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+.search-submit:hover, .search-submit:focus-visible {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.search-submit:hover img.icon2,
+.search-submit:focus-visible img.icon2 {
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 480px) {
+  .search-submit .label {
+    display: none;
+  }
+  .search-submit {
+    padding: 0 16px;
+  }
+}
+
+/* ==========================================
+   추천 검색어 팝업 (Overlay Popup Modal)
+   ========================================== */
+
+/* 팝업 오버레이 백드롭 */
+.search-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65); /* 주변 밝기를 낮춰 팝업에 강력한 집중력 부여 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 120px;
+  z-index: 10000; /* 헤더보다 위에 뜨도록 충분한 z-index 설정 */
+  backdrop-filter: blur(8px); /* 블러 농도를 높여 한 차원 높은 미려함 연출 */
+  animation: popupFadeIn 0.2s ease-out forwards;
+}
+
+/* 팝업 본체 박스 */
+.search-popup-content {
+  width: 92%;
+  max-width: 500px;
+  background: linear-gradient(135deg, #EDF3F8 0%, #E4ECF3 100%); /* 피그마 느낌의 은은한 미색 */
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  animation: popupSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 팝업 헤더 구조 */
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* 팝업 검색창 래퍼 - 사용자 피드백 적용: 검은색 대신 흰색 */
+.popup-search-input-wrapper {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1; /* 둔탁한 2.5px 검은색(#2D3748)을 걷어내고 정갈하고 화사한 슬림선 적용 */
+  border-radius: 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.popup-search-input-wrapper:focus-within {
+  border-color: var(--color-primary, #007AFF);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+}
+
+.popup-search-input {
+  width: 100%;
+  border: none;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1A202C;
+  background: transparent;
+  outline: none;
+}
+.popup-search-input:focus-visible {
+  outline: none;
+}
+
+.popup-search-input::placeholder {
+  color: #A0AEC0;
+  font-weight: 500;
+}
+
+/* 팝업 액션 버튼 영역 */
+.popup-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.popup-action-btn {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.popup-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  transform: scale(1.05);
+}
+
+.popup-action-btn:active {
+  transform: scale(0.95);
+}
+
+.popup-action-btn .icon-large {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #2D3748;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-action-btn img.icon-large {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* 팝업 구분 실선 */
+.popup-divider {
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, transparent);
+  margin: 20px 0;
+}
+
+/* 팝업 추천검색어 영역 */
+.popup-body {
+  padding: 0 4px;
+  text-align: left;
+}
+
+.recommend-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1A202C;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+}
+
+.recommend-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start; /* 부모의 중앙 정렬 상속 방지, 가로 꽉 채우기 */
+  width: 100%;
+  gap: 12px;
+}
+
+.recommend-item-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left !important; /* 확실하게 좌측 정렬 적용 */
+  padding: 8px 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4A5568;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.recommend-item-btn:hover {
+  color: #1A202C;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding-left: 12px; /* 살짝 밀려나는 효과 */
+}
+
+/* 애니메이션 키프레임 */
+@keyframes popupFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popupSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 모바일 반응형 디테일 */
+@media (max-width: 540px) {
+  .search-popup-overlay {
+    padding-top: 60px;
+  }
+  .search-popup-content {
+    width: 94%;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+  .popup-search-input {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+
+  }
+  .popup-action-btn .icon-large {
+    font-size: 1.4rem;
+  }
+  .popup-action-btn img.icon-large {
+    width: 20px;
+    height: 20px;
+  }
+  .recommend-item-btn {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================
+   테블릿 및 데스크탑용 드롭다운 스타일
+   ========================================== */
+.desktop-suggest-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 12px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0; /* 부드러운 은은한 실버그레이 엣지 */
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 2px 5px rgba(0, 0, 0, 0.02);
+  padding: 24px;
+  z-index: 999;
+  text-align: left;
+  animation: popupSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.desktop-suggest-dropdown .recommend-title {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.desktop-suggest-dropdown .recommend-list {
+  gap: 10px;
+}
+

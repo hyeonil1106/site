@@ -1,0 +1,337 @@
+/* =====================================================
+   전시 리스트 페이지 (Exhibition List Sub Page) CSS
+   ===================================================== */
+
+.sub-page-wrapper.list-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #111111;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 1. 정적 서브 네비게이션 헤더 (앱 감성 고증) */
+.sub-nav-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.btn-sub-back {
+  background: none;
+  border: none;
+  font-size: 22px;
+  font-weight: 300;
+  color: #111111;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: transform 0.2s;
+}
+.btn-sub-back:hover {
+  transform: translateX(-3px);
+}
+
+.sub-header-logo {
+  font-size: 18px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.header-space {
+  width: 40px; /* 헤더 밸런스를 위한 공간 확보 */
+}
+
+/* 2. 피그마 가로 스크롤/탭 메뉴바 */
+.sub-tab-navigation {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 60px;
+  z-index: 90;
+}
+
+.tab-list {
+  display: flex;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1200px;
+  justify-content: space-around;
+}
+
+.tab-list li {
+  flex: 1;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: #6b7280;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tab-list li:hover {
+  color: #111111;
+}
+
+.tab-list li.active {
+  color: #111111;
+  font-weight: var(--font-weight-extrabold);
+}
+
+/* 활성 탭 인디케이터 바 */
+.tab-list li.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background-color: #111111;
+  border-radius: 2px;
+}
+
+/* 3. 컨텐츠 그리드 컨테이너 */
+.list-content-container {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  box-sizing: border-box;
+}
+
+/* 반응형 가변 그리드 (모바일 기본: 1열) */
+.responsive-exhibition-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  animation: gridFadeIn 0.4s ease-out;
+}
+
+/* 4. 프리미엄 명화 리스트 카드 */
+.premium-list-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.premium-list-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* 카드 이미지 박스 */
+.card-img-box {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #e5e7eb;
+  position: relative;
+}
+
+.card-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.premium-list-card:hover .card-img-box img {
+  transform: scale(1.05);
+}
+
+/* 카드 정보 영역 */
+.card-info-box {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+  margin: 0 0 8px 0;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0 0 14px 0;
+  flex: 1; /* 내용이 적어도 버튼은 하단 정렬되도록 유도 */
+}
+
+.card-period {
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  color: #9ca3af;
+  margin: 0 0 20px 0;
+}
+
+/* 5. 피그마 고증 전용 대형 CTA 버튼 */
+.btn-card-booking {
+  width: 100%;
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 0;
+  font-size: 15px;
+  font-weight: var(--font-weight-extrabold);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.btn-card-booking:hover {
+  background-color: #333333;
+  transform: scale(0.98);
+}
+
+.btn-card-booking.disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 6. 동적 페이지네이션 바 */
+.pagination-wrapper {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.btn-page-arrow {
+  background-color: transparent; /* 테두리와 불투명 배경 제거 */
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4b5563;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-page-arrow:hover:not(:disabled) {
+  color: #111111;
+  background-color: transparent;
+  transform: translateX(-2px); /* 이전 버튼: 왼쪽 흔들림 */
+}
+
+.btn-page-arrow.next:hover:not(:disabled) {
+  transform: translateX(2px); /* 다음 버튼: 오른쪽 흔들림 */
+}
+
+.btn-page-arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.page-numbers-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-page-num {
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-page-num:hover {
+  background-color: #f3f4f6;
+  color: #111111;
+}
+
+.btn-page-num.active {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+.empty-list-message {
+  text-align: center;
+  padding: 80px 0;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+@keyframes gridFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   ★ 미디어 쿼리 반응형 조율 (디자인 무결성 보존)
+   ===================================================== */
+
+/* A. 태블릿 뷰 (화면폭 768px 이상) */
+@media (min-width: 768px) {
+  .responsive-exhibition-grid {
+    grid-template-columns: repeat(2, 1fr); /* 태블릿: 2열 그리드 */
+    gap: 28px;
+  }
+  
+  .tab-list li {
+    font-size: 16px;
+  }
+  
+  .sub-header-logo {
+    font-size: 20px;
+  }
+}
+
+/* B. 데스크톱 뷰 (화면폭 1024px 이상) */
+@media (min-width: 1024px) {
+  .responsive-exhibition-grid {
+    grid-template-columns: repeat(3, 1fr); /* 데스크톱: 3열 그리드 */
+    gap: 32px;
+  }
+  
+  .list-content-container {
+    padding-top: 40px;
+  }
+  
+  .tab-list li.active::after {
+    left: 30%;
+    right: 30%; /* 긴 화면폭에서 언더라인 비율 최적화 */
+  }
+}

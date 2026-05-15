@@ -1,0 +1,565 @@
+/* =====================================================
+   예약 통합 모달 금융 앱 스타일 (탑-다운 슬라이드 업그레이드)
+   ===================================================== */
+
+/* 1. 최상위 오버레이 및 모달 틀 */
+.res-modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.res-modal-window {
+  position: relative; /* 퀵 피커의 절대적 기준점 */
+  width: 92%;
+  max-width: 420px;
+  background-color: var(--color-bg-white);
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 피커가 위로 슬라이드 업되어 숨겨질 때 숨김 마스킹 처리 보장 */
+  max-height: 92vh;
+  animation: slideUp 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 2. 스크롤 본체 래퍼 */
+.res-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 3. 모달 메인 헤더 (고정 타이틀 영역) */
+.res-header {
+  background-color: #ffffff;
+  color: var(--color-text-main);
+  border-bottom: 1px solid #f1f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 48px;
+  position: relative;
+  height: 60px; /* 고정 헤더 높이 설정하여 피커 top 계산의 기준선 제공 */
+  box-sizing: border-box;
+  z-index: 1600; /* 피커(1500)보다 살짝 높게 두어 헤더가 피커 위로 덮이지 않고 고정되도록 튜닝 */
+}
+
+.res-modal-main-title {
+  font-size: 16px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-res-close-header {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #888888;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.btn-res-close-header:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #111111;
+}
+
+/* 3-1. 캘린더 컨트롤 바 (년/월 선택 트리거) */
+.calendar-control-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 24px 12px;
+  background-color: var(--color-bg-white);
+  cursor: pointer;
+}
+
+.bank-header-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #f1f3f7;
+  padding: 8px 20px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.calendar-control-bar:hover .bank-header-trigger {
+  background-color: #e9ecef;
+}
+
+.res-month-text.clickable {
+  font-size: 18px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+}
+
+.down-chevron-icon {
+  font-size: 10px;
+  color: #666666;
+  transform: scaleY(0.75);
+}
+
+/* 4. ★ 초고도화: '위에서 아래로' 쏟아지는 커튼 퀵 피커 패널 */
+.quick-picker-panel.from-top {
+  position: absolute;
+  top: 60px; /* 헤더 바로 아랫선에서 출발 */
+  left: 0;
+  right: 0;
+  bottom: 0; /* 푸터까지 완전히 덮는 풀 스크린 모션 */
+  background-color: #ffffff;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  
+  /* 위에서 숨겨진 채로 준비 (-100% 번안) */
+  transform: translateY(-100%); 
+  opacity: 0;
+  visibility: hidden;
+  
+  /* 프리미엄 앱 느낌의 쫀득하고 폭발적인 Ease-Out Expo 트랜지션 */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease,
+              visibility 0.4s;
+}
+
+/* 활성화 시 슬라이드 다운! (Curtain Motion) */
+.quick-picker-panel.from-top.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.picker-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.picker-header h3 {
+  font-size: 15px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+}
+
+.picker-close-mini {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* 피커 본체: 풀사이즈 (연도 좌우 선택 + 월 축소 그리드) */
+.picker-body-full {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  background-color: #f9fafb;
+}
+
+.picker-year-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.btn-year-nav {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #8e8e93;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.btn-year-nav:hover {
+  color: #111111;
+}
+
+.current-temp-year {
+  font-size: 18px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+  min-width: 60px;
+  text-align: center;
+}
+
+.month-grid-picker.compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.picker-month-btn.compact {
+  border: none;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px 0;
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  color: #48484a;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.picker-month-btn.compact:hover {
+  background-color: #f1f3f6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.picker-month-btn.compact.active {
+  background-color: #222222;
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+}
+
+.bank-header-title-only {
+  display: flex;
+  align-items: center;
+}
+
+/* 5. Figma 캘린더 그리드 본체 */
+.modal-exhibition-title-banner {
+  padding: 24px 24px 8px;
+  background-color: var(--color-bg-white);
+  font-size: 20px;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-main);
+  text-align: center;
+  word-break: keep-all;
+}
+
+.calendar-section {
+  padding: 12px 24px 20px;
+  background-color: var(--color-bg-white);
+  border-bottom: 1px solid #eeeeee;
+}
+
+.weekday-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.weekday-grid span {
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  color: #0a1128;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 8px;
+}
+
+.day-cell-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day-cell-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-cell-btn:hover {
+  background-color: #f0f2f5;
+}
+
+.day-cell-btn.active {
+  background-color: #111111;
+  color: var(--color-white);
+}
+
+/* 6. 관람 인원 카운터 영역 */
+.people-counter-section {
+  padding: 14px 24px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.counter-title {
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+}
+
+.counter-control {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-white);
+  border: 1px solid #e5e5e5;
+  border-radius: 24px;
+  padding: 2px;
+}
+
+.btn-counter-adjust {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-main);
+}
+
+.btn-counter-adjust:hover:not(:disabled) {
+  background-color: #f1f1f1;
+  border-radius: 50%;
+}
+
+.btn-counter-adjust:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.counter-display {
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* 7. Figma 하단 시간선택 영역 (다크 테마 해제) */
+.time-selection-section {
+  background-color: #f8f9fa; /* 인원수 설정 부분의 배경색과 완전 동일화 */
+  padding: 20px 24px 24px;
+  color: var(--color-text-main);
+}
+
+.time-title {
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+  color: #111111;
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.time-pill-btn {
+  background-color: #ffffff; /* 기본: 흰색 버튼 */
+  color: #111111; /* 기본: 검은색 글자 */
+  border: 1px solid #111111; /* 기본: 검은색 테두리 */
+  border-radius: 30px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.time-pill-btn:hover {
+  transform: translateY(-1px);
+  background-color: #f0f2f5;
+}
+
+.time-pill-btn.active {
+  background-color: #111111; /* 클릭 시: 검은색 배경 */
+  color: #ffffff; /* 클릭 시: 흰색 글자 */
+  border-color: #111111;
+  transform: scale(0.95);
+}
+
+/* 8. 최종 관람예약 마감 푸터 */
+.res-footer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  z-index: 100; /* 컨텐츠 스크롤 영역보다 높음 보장 */
+}
+
+.res-summary-bar {
+  padding: 14px 24px;
+  background-color: #eef2f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  border-top: 1px solid #d9e2ec;
+}
+
+.res-summary-text {
+  color: var(--color-text-main);
+  text-align: center;
+}
+
+.res-summary-text strong {
+  color: var(--color-primary);
+}
+
+.btn-booking-submit {
+  width: 100%;
+  background-color: #111111; /* 연회색에서 최종 검은색 배경으로 승급 */
+  border: none;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  color: #ffffff; /* 글씨는 흰색으로 적용 */
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  letter-spacing: 1px;
+}
+
+.btn-booking-submit:hover {
+  background-color: #333333; /* 호버 시 소프트 다크 그레이 반응 */
+}
+
+.btn-booking-submit:active {
+  background-color: #000000;
+  transform: scale(0.99);
+}
+
+/* 9. 예약 성공 처리부 */
+.success-message-container {
+  position: relative;
+  padding: 60px 24px;
+  text-align: center;
+  background: #ffffff;
+  border: #111111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  min-height: 320px;
+  box-sizing: border-box;
+  z-index: 1800; /* 예약 성공 시엔 모든 레이어 위에 노출 */
+}
+
+.success-headline {
+  font-size: 22px;
+  font-weight: var(--font-weight-extrabold);
+  color: #111111;
+  margin-bottom: 12px;
+}
+
+.success-details {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-main);
+  background-color: #fff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-modal-go-main {
+  width: 100%;
+  background-color: #111111; /* 최종 관람예약 버튼과 똑같은 블랙 스타일 적용 */
+  border: none;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: #ffffff; /* 글씨 색은 흰색 */
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+}
+
+.btn-modal-go-main:hover {
+  background-color: #333333; /* 호버 시 부드러운 다크 그레이 인터랙션 */
+}
+
+.btn-modal-go-main:active {
+  background-color: #000000;
+  transform: scale(0.99);
+}
+
+/* 애니메이션 프레임 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 반응형 보정 */
+@media (max-width: 480px) {
+  .res-modal-window {
+    border-radius: 20px;
+  }
+  .time-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
