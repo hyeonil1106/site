@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import imgPage from '../assets/page.png'
 
 import logoImg from '../assets/logo.png';
 
@@ -42,7 +43,7 @@ const LoginPage = () => {
             onClick={handleBackClick} 
             aria-label="이전 페이지로 이동"
           >
-            <span className="arrow-icon" aria-hidden="true">‹</span>
+            <img src={imgPage} className="page-icon" alt="page" aria-hidden="true"/>
           </button>
           <div className="login-logo">
             <Link to="/">

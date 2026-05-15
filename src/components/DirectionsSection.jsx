@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './DirectionsSection.css';
+import imgMap from '../assets/map.png';
+import imgBus from '../assets/bus.png';
+import imgTrain from '../assets/train.png';
+import imgCar from '../assets/car.png';
 
 const DirectionsSection = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,7 +27,7 @@ const DirectionsSection = () => {
         
         <div className="directions-grid">
           <div className="direction-card">
-            <div className="direction-icon" aria-hidden="true">📍</div>
+            <img src={imgMap} className="imgMap" alt="map"/>
             <h3 className="direction-title">주소</h3>
             <p className="direction-desc">
               경기도 수원시 팔달구 정조로 833 (신풍동)<br/>
@@ -33,7 +37,7 @@ const DirectionsSection = () => {
           </div>
           
           <div className="direction-card">
-            <div className="direction-icon" aria-hidden="true">🚌</div>
+            <img src={imgBus} className="imgBus" alt="bus"/>
             <h3 className="direction-title">교통편</h3>
             <p className="direction-desc">
               <strong>버스:</strong> 팔달구청, 화성행궁, 수원시립미술관 하차<br/>
@@ -66,7 +70,7 @@ const DirectionsSection = () => {
             {modalContent === 'guide' && (
               <div className="guide-container">
                 <div className="guide-item">
-                  <div className="guide-icon">🚌</div>
+                  <img src={imgBus} className="imgBus" alt="bus"/>
                   <div className="guide-text">
                     <strong>버스 이용 시</strong>
                     <p>팔달구청, 화성행궁, 수원시립미술관 정류장 하차</p>
@@ -74,7 +78,7 @@ const DirectionsSection = () => {
                   </div>
                 </div>
                 <div className="guide-item">
-                  <div className="guide-icon">🚇</div>
+                  <img src={imgTrain} className="imgTrain" alt="train"/>
                   <div className="guide-text">
                     <strong>지하철 이용 시</strong>
                     <p>1호선 / 수인분당선 수원역 하차 후</p>
@@ -82,7 +86,7 @@ const DirectionsSection = () => {
                   </div>
                 </div>
                 <div className="guide-item">
-                  <div className="guide-icon">🚗</div>
+                  <img src={imgCar} className="imgCar" alt="car"/>
                   <div className="guide-text">
                     <strong>자가용 이용 시 (주차 안내)</strong>
                     <p>미술관 지하 1층, 지하 2층 주차장 이용</p>

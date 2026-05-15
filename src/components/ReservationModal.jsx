@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ReservationModal.css';
+import imgDown from '../assets/down.png'
 
 const ReservationModal = ({ isOpen, onClose, exhibitionTitle }) => {
   // 캘린더 현재 날짜 상태
@@ -101,7 +102,6 @@ const ReservationModal = ({ isOpen, onClose, exhibitionTitle }) => {
                 onClick={onClose}
                 aria-label="예약 팝업 닫기"
               >
-                ✕
               </button>
             </header>
 
@@ -160,7 +160,7 @@ const ReservationModal = ({ isOpen, onClose, exhibitionTitle }) => {
               <div className="calendar-control-bar" onClick={handleHeaderClick}>
                 <div className="bank-header-trigger" title="연도/월 변경하기">
                   <h2 className="res-month-text clickable">{currentYear}년 {currentMonth}월</h2>
-                  <span className="down-chevron-icon">▼</span>
+                  <img src={imgDown} className="down-chevron-icon" alt="down"/>
                 </div>
               </div>
 

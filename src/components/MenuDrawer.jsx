@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './MenuDrawer.css';
+import imgClose from '../assets/close.png';
 
 const MenuDrawer = ({ isOpen, onClose }) => {
   // 현재 오픈된 아코디언 섹션 상태 관리 (초기값: null - 모두 닫힌 상태)
@@ -45,7 +46,7 @@ const MenuDrawer = ({ isOpen, onClose }) => {
             onClick={onClose} 
             aria-label="전체 메뉴 닫기"
           >
-            <span className="close-icon" aria-hidden="true">✕</span>
+            <img src={imgClose} className="close-icon" alt="close" aria-hidden="true"/>
           </button>
         </div>
 
