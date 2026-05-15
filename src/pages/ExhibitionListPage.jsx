@@ -15,36 +15,37 @@ import newsGalleryImg from '../assets/news_gallery.png';
 import glassArtImg from '../assets/glass_art.png';
 import seaBoyImg from '../assets/sea_boy.png';
 import winterRainImg from '../assets/winter_rain.png';
+import mindLandscapeImg from '../assets/mind_landscape.png';
+import geometricSculptureImg from '../assets/geometric_sculpture.png';
+import snowFlowerImg from '../assets/snow_flower.png';
+import sunsetSilhouetteImg from '../assets/sunset_silhouette.png';
+import cyberArtImg from '../assets/cyber_art.png';
 import logoImg from '../assets/logo.png';
 
-// 글로벌 전시 데이터 베이스 (다양하고 수준 높은 아티스틱 이미지 개별 큐레이션)
+// 글로벌 전시 데이터 베이스 (모든 전시가 100% 중복 없이 고유한 아트 비주얼을 소유함)
 const ALL_DATA = {
   current: [
     { id: 1, title: "별 헤는 밤", desc: "밤하늘의 아름다움을 담은 서정적인 명작 기획전", period: "2025.02.15 ~ 2025.04.15", image: starryNightImg },
     { id: 2, title: "낙엽 속의 꿈", desc: "가을의 정취와 로맨틱한 수채화의 만남", period: "2024.11.01 ~ 2024.12.01", image: autumnDreamImg },
     { id: 3, title: "빛과 공간의 미학", desc: "자연의 빛이 빚어내는 신비로운 입체 공간 연출", period: "2025.03.01 ~ 2025.05.30", image: colorSpaceImg },
     { id: 4, title: "시간의 흔적", desc: "과거와 현대의 기억을 넘나드는 특별 고전 회고전", period: "2025.01.10 ~ 2025.03.20", image: timeFlowImg },
-    { id: 5, title: "마음의 풍경", desc: "내면의 고요함을 붓끝으로 표현한 추상화 모음전", period: "2025.02.05 ~ 2025.04.10", image: newsGalleryImg },
+    { id: 5, title: "마음의 풍경", desc: "내면의 고요함을 붓끝으로 표현한 추상화 모음전", period: "2025.02.05 ~ 2025.04.10", image: mindLandscapeImg },
     { id: 6, title: "도심 속 오아시스", desc: "지친 일상에 위로를 건네는 녹색 예술 정원", period: "2025.02.28 ~ 2025.05.15", image: natureArtImg },
-    { id: 7, title: "색채의 변주곡", desc: "원색의 대비와 조화가 주는 강렬한 시각 에너지", period: "2025.03.15 ~ 2025.06.15", image: colorSpaceImg },
-    { id: 8, title: "유리 상자의 기억", desc: "투명한 유리 속에 각인된 영롱한 조형 아트", period: "2025.02.10 ~ 2025.04.20", image: glassArtImg },
-    { id: 9, title: "바다와 소년", desc: "푸른 파도가 선사하는 동화적 서사의 일러스트", period: "2025.03.05 ~ 2025.05.25", image: seaBoyImg },
-    { id: 10, title: "대지의 리듬", desc: "흙과 나무, 날것 그대로의 소재를 다룬 설치 미술", period: "2025.02.01 ~ 2025.04.05", image: pressEcoImg },
-    { id: 11, title: "디지털 플로우", desc: "코딩과 미디어 아트가 만나 빚는 움직이는 벽화", period: "2025.03.12 ~ 2025.06.05", image: digitalArtImg },
-    { id: 12, title: "겨울비 내리던 날", desc: "차갑지만 따스한 흑백 모노톤의 서정성 탐구", period: "2025.01.20 ~ 2025.03.30", image: winterRainImg },
+    { id: 7, title: "유리 상자의 기억", desc: "투명한 유리 속에 각인된 영롱한 조형 아트", period: "2025.02.10 ~ 2025.04.20", image: glassArtImg },
+    { id: 8, title: "바다와 소년", desc: "푸른 파도가 선사하는 동화적 서사의 일러스트", period: "2025.03.05 ~ 2025.05.25", image: seaBoyImg },
   ],
   upcoming: [
-    { id: 101, title: "신록의 행진", desc: "싱그러운 새봄의 기운을 담아낸 수묵채색전", period: "2025.05.01 ~ 2025.07.01", image: natureArtImg },
-    { id: 102, title: "우주와의 조우", desc: "끝없는 심연의 우주공간을 입체 프로젝션으로 조망", period: "2025.06.15 ~ 2025.08.30", image: starryNightImg },
-    { id: 103, title: "선의 기하학", desc: "직선과 곡선의 반복이 주는 미니멀리즘 조각전", period: "2025.05.20 ~ 2025.07.25", image: timeFlowImg },
-    { id: 104, title: "여름의 조각", desc: "한여름 밤의 꿈같은 청량한 색조의 비주얼 향연", period: "2025.07.10 ~ 2025.09.05", image: colorSpaceImg },
+    { id: 101, title: "대지의 리듬", desc: "흙과 나무, 날것 그대로의 소재를 다룬 설치 미술", period: "2025.05.01 ~ 2025.07.01", image: pressEcoImg },
+    { id: 102, title: "디지털 플로우", desc: "코딩과 미디어 아트가 만나 빚는 움직이는 벽화", period: "2025.06.15 ~ 2025.08.30", image: digitalArtImg },
+    { id: 103, title: "선의 기하학", desc: "직선과 곡선의 반복이 주는 미니멀리즘 조각전", period: "2025.07.10 ~ 2025.09.05", image: geometricSculptureImg },
   ],
   past: [
-    { id: 201, title: "눈의 꽃", desc: "겨울 왕국의 하얀 설경을 모티브로 한 회화전", period: "2024.12.10 ~ 2025.01.15", image: winterRainImg },
-    { id: 202, title: "황혼의 실루엣", desc: "노을 질 무렵의 서사적인 감동을 화폭에 담다", period: "2024.10.05 ~ 2024.11.25", image: autumnDreamImg },
+    { id: 201, title: "겨울비 내리던 날", desc: "차갑지만 따스한 흑백 모노톤의 서정성 탐구", period: "2024.12.10 ~ 2025.01.15", image: winterRainImg },
+    { id: 202, title: "눈의 꽃", desc: "겨울 왕국의 하얀 설경을 모티브로 한 회화전", period: "2024.11.01 ~ 2024.12.15", image: snowFlowerImg },
+    { id: 203, title: "황혼의 실루엣", desc: "노을 질 무렵의 서사적인 감동을 화폭에 담다", period: "2024.10.05 ~ 2024.11.25", image: sunsetSilhouetteImg },
   ],
   online: [
-    { id: 301, title: "메타 버추얼 뮤지엄", desc: "가상현실 공간에서 만나는 신감각 현대 미디어 전시", period: "상시 운영", image: digitalArtImg },
+    { id: 301, title: "메타 버추얼 뮤지엄", desc: "가상현실 공간에서 만나는 신감각 현대 미디어 전시", period: "상시 운영", image: cyberArtImg },
     { id: 302, title: "온라인 컬렉션 아카이브", desc: "수원시립미술관 주요 소장품의 인터랙티브 웹 회화전", period: "상시 운영", image: newsGalleryImg },
   ]
 };

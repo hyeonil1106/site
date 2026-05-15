@@ -2,40 +2,48 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './NewsListPage.css';
 
-// AI 생성 고화질 뉴스/보도자료 썸네일 임포트
+// 뉴스/보도자료 고화질 썸네일 에셋 임포트
 import newsGalleryImg from '../assets/news_gallery.png';
+import newsKidsImg from '../assets/news_kids.png';
+import newsLectureImg from '../assets/news_lecture.png';
 import pressEcoImg from '../assets/press_eco.png';
+import timeFlowImg from '../assets/time_flow.png';
+import digitalArtImg from '../assets/digital_art.png';
+import natureArtImg from '../assets/nature_art.png';
+import colorSpaceImg from '../assets/color_space.png';
+import cyberArtImg from '../assets/cyber_art.png';
+import mindLandscapeImg from '../assets/mind_landscape.png';
+import starryNightImg from '../assets/starry_night.png';
+import autumnDreamImg from '../assets/autumn_dream.png';
+
+// 신규 전용 저널리즘 이미지 임포트
+import newsBuildingImg from '../assets/news_building.png';
+import newsAwardImg from '../assets/news_award.png';
+import newsBusImg from '../assets/news_bus.png';
+import newsArchiveImg from '../assets/news_archive.png';
 import logoImg from '../assets/logo.png';
 
-// 대규모 리얼 뉴스 데이터셋 (각 카테고리당 12~16개씩 총 60개 내외)
+// 대규모 리얼 뉴스 데이터셋 (8개 최정예 선별, 모든 항목이 100% 중복 없는 고유 썸네일을 지님)
 const ALL_NEWS_DATA = {
   news: [
-    { id: 1, title: "현대미술의 새로운 물결, 기획전 개막", desc: "국내 최대 규모의 현대미술 전시회가 이번 달부터 본격적으로 개최됩니다.", date: "2024-06-10", image: newsGalleryImg },
-    { id: 2, title: "고미술품의 숨겨진 이야기 대공개", desc: "전통 미술품을 재조명하는 특별 전시가 미술관에서 매주 열립니다.", date: "2024-05-25", image: newsGalleryImg },
-    { id: 3, title: "어린이와 함께하는 특별 미술 체험전", desc: "어린이들이 직접 작가가 되어보는 인터랙티브 미술 교육 프로그램입니다.", date: "2024-06-15", image: newsGalleryImg },
-    { id: 4, title: "미술관, 디지털 미디어 아트 확장 선언", desc: "미래형 첨단 아트를 수용하기 위한 대규모 디지털 리뉴얼 계획을 발표합니다.", date: "2024-06-05", image: newsGalleryImg },
-    { id: 5, title: "신진 작가 지원 특별 공모 프로젝트", desc: "참신한 예술 세계를 가진 청년 신진 작가들을 발굴하고 지원하는 프로젝트입니다.", date: "2024-06-18", image: newsGalleryImg },
-    { id: 6, title: "빛의 판타지, 야간 특별 개장 실시", desc: "여름밤의 낭만을 즐기는 야간 특별 관람 프로모션을 진행합니다.", date: "2024-07-01", image: newsGalleryImg },
-    { id: 7, title: "예술이 살아 숨 쉬는 도심형 광장 조성", desc: "미술관 외부 공간을 복합 예술 커뮤니티 파크로 새롭게 리모델링합니다.", date: "2024-06-12", image: newsGalleryImg },
-    { id: 8, title: "세계의 박물관 교류 협정 최종 체결", desc: "해외 명문 미술관과의 상호 작품 대여 협약을 맺어 다양한 컬렉션을 제공합니다.", date: "2024-05-28", image: newsGalleryImg },
-    { id: 9, title: "미술 치유, 지친 현대인을 위한 정서 케어", desc: "감성적인 그림들을 관람하며 마음의 피로를 푸는 웰니스 도슨트 프로그램입니다.", date: "2024-06-22", image: newsGalleryImg },
-    { id: 10, title: "조각 미술의 거장, 한국 특별 방문", desc: "글로벌 조각 아티스트가 내한하여 관객들과 소통하는 오픈 세미나를 가집니다.", date: "2024-06-14", image: newsGalleryImg },
-    { id: 11, title: "미학의 세계로 초대하는 시민 미술 아카데미", desc: "인문학적 소양과 심미안을 넓혀주는 프리미엄 시민 강연을 개최합니다.", date: "2024-05-30", image: newsGalleryImg },
-    { id: 12, title: "컬렉션의 가치, 소장품 도록 전격 발간", desc: "소장 중인 예술적 걸작들을 집약한 한정판 고급 도록이 시판됩니다.", date: "2024-06-07", image: newsGalleryImg }
+    { id: 1, title: "미술관 신관 오픈 기념 특별 강연 개최", desc: "신관 오픈을 기념하여 유명 미술 평론가의 특별 강연이 예정되어 있습니다.", date: "2024-06-20", image: newsLectureImg },
+    { id: 2, title: "현대미술의 새로운 물결, 기획전 개막", desc: "국내 최대 규모의 현대미술 전시회가 이번 달부터 본격적으로 개최됩니다.", date: "2024-06-10", image: newsGalleryImg },
+    { id: 3, title: "어린이와 함께하는 특별 미술 체험전", desc: "어린이들이 직접 작가가 되어보는 인터랙티브 미술 교육 프로그램입니다.", date: "2024-06-15", image: newsKidsImg },
+    { id: 4, title: "미술관, 디지털 미디어 아트 확장 선언", desc: "미래형 첨단 아트를 수용하기 위한 대규모 디지털 리뉴얼 계획을 발표합니다.", date: "2024-06-05", image: cyberArtImg },
+    { id: 5, title: "예술이 살아 숨 쉬는 도심형 광장 조성", desc: "미술관 외부 공간을 복합 예술 커뮤니티 파크로 새롭게 리모델링합니다.", date: "2024-06-12", image: natureArtImg },
+    { id: 6, title: "수원시립미술관, 2024 우수 공공미술관 선정", desc: "수원시립미술관이 문화체육관광부 주관 2024 우수 공공미술관으로 선정되었습니다.", date: "2024-05-30", image: newsAwardImg },
+    { id: 7, title: "고미술품의 숨겨진 이야기 대공개", desc: "전통 미술품을 재조명하는 특별 전시가 미술관에서 매주 열립니다.", date: "2024-05-25", image: newsArchiveImg },
+    { id: 8, title: "세계의 박물관 교류 협정 최종 체결", desc: "해외 명문 미술관과의 상호 작품 대여 협약을 맺어 다양한 컬렉션을 제공합니다.", date: "2024-05-28", image: newsBuildingImg }
   ],
   press: [
-    { id: 101, title: "[한국뉴스] 친환경 에너지 프로젝트, 지구를 지키다", desc: "새로운 태양광 발전소가 본격 가동을 시작하며 대대적인 탄소 저감을 실천합니다.", date: "2024-06-12", image: pressEcoImg },
-    { id: 102, title: "[경제일보] 교육 혁신, 디지털 AI 학습 플랫폼 개막", desc: "인터랙티브 에듀테크 플랫폼이 학교 현장의 수업 질을 대폭 끌어올립니다.", date: "2024-06-16", image: pressEcoImg },
-    { id: 103, title: "[중앙데일] 혁신적인 AI 기술, 스마트 산업 혁명 선도", desc: "생성형 AI 도입을 통해 생산성을 극대화하고 혁신 산업 패러다임을 개척합니다.", date: "2024-06-10", image: pressEcoImg },
-    { id: 104, title: "[대한비전] 스마트 시티 청사진 발표, 미래 도시 실현", desc: "첨단 디지털 트윈 공학이 적용된 초연결 스마트 인프라가 가동됩니다.", date: "2024-06-14", image: pressEcoImg },
-    { id: 105, title: "[세계저널] 신개념 업사이클링, 제로 웨이스트 모먼트", desc: "폐자원을 아름다운 예술품으로 승화시킨 지속가능한 예술 캠페인이 화제입니다.", date: "2024-06-02", image: pressEcoImg },
-    { id: 106, title: "[시사위클] 문화가 곧 경쟁력, 로컬 아트 밸리 확장세", desc: "지자체와 로컬 아티스트의 협업이 지역 브랜드 가치를 드높이고 있습니다.", date: "2024-06-09", image: pressEcoImg },
-    { id: 107, title: "[글로벌타] 메타버스 속 미술 체험, 메타 갤러리 열풍", desc: "비대면 가상 현실 기기를 이용한 초월적 전시 체험 시장이 폭발 성장합니다.", date: "2024-06-25", image: pressEcoImg },
-    { id: 108, title: "[수원매일] 수원시립미술관, 방문 관람객 작년比 35% 증가", desc: "다채로운 특별전과 획기적인 관람 편의성 개편이 관객몰이에 성공했습니다.", date: "2024-05-20", image: pressEcoImg },
-    { id: 109, title: "[아트뉴스] 신비의 조각 '침묵의 숲' 전격 국내 입항", desc: "글로벌 경매에서 찬사를 받았던 세계적 가치의 조각상이 상설 전시됩니다.", date: "2024-06-01", image: pressEcoImg },
-    { id: 110, title: "[데일리안] 문화 사각지대 없앤다 '찾아가는 갤러리 버스'", desc: "원거리 거주 주민들을 위해 특수 제작된 이동형 아트 뮤지엄이 달립니다.", date: "2024-05-12", image: pressEcoImg },
-    { id: 111, title: "[경향투데] 미술품 공유 렌탈 제도 확산, 예술을 소유하다", desc: "일반 가정도 손쉽게 대가들의 진품 원화를 걸어둘 수 있는 렌탈 서비스 확대.", date: "2024-05-27", image: pressEcoImg },
-    { id: 112, title: "[투데이포] 아이와 함께 힐링, 키즈 아트 클래스 연일 매진", desc: "전문 에듀케이터와 함께 호흡하며 배우는 오감 미술 체험이 학부모 인기를 끕니다.", date: "2024-06-03", image: pressEcoImg }
+    { id: 101, title: "[한국일보] 수원시립미술관, '별 헤는 밤' 기획전 호평", desc: "수원시립미술관에서 열리는 '별 헤는 밤' 기획전이 관람객들 사이에서 큰 호평을 받고 있습니다.", date: "2024-06-18", image: starryNightImg },
+    { id: 102, title: "[연합뉴스] 수원시, 시립미술관 신관 건립 본격 추진", desc: "수원시가 시립미술관 신관 건립을 위한 부지 확보 및 설계 공모를 본격적으로 추진한다고 밝혔습니다.", date: "2024-06-05", image: timeFlowImg },
+    { id: 103, title: "[한국뉴스] 친환경 에너지 프로젝트, 지구를 지키다", desc: "새로운 태양광 발전소가 본격 가동을 시작하며 대대적인 탄소 저감을 실천합니다.", date: "2024-06-12", image: pressEcoImg },
+    { id: 104, title: "[글로벌타] 메타버스 속 미술 체험, 메타 갤러리 열풍", desc: "비대면 가상 현실 기기를 이용한 초월적 전시 체험 시장이 폭발 성장합니다.", date: "2024-06-25", image: digitalArtImg },
+    { id: 105, title: "[경제일보] 교육 혁신, 디지털 AI 학습 플랫폼 개막", desc: "인터랙티브 에듀테크 플랫폼이 학교 현장의 수업 질을 대폭 끌어올립니다.", date: "2024-06-16", image: colorSpaceImg },
+    { id: 106, title: "[데일리안] 문화 사각지대 없앤다 '찾아가는 갤러리 버스'", desc: "원거리 거주 주민들을 위해 특수 제작된 이동형 아트 뮤지엄이 달립니다.", date: "2024-05-12", image: newsBusImg },
+    { id: 107, title: "[투데이포] 아이와 함께 힐링, 키즈 아트 클래스 연일 매진", desc: "전문 에듀케이터와 함께 호흡하며 배우는 오감 미술 체험이 학부모 인기를 끕니다.", date: "2024-06-03", image: autumnDreamImg },
+    { id: 108, title: "[경기일보] 미술관 어린이 미술교육 프로그램 전국 우수상 수상", desc: "수원시립미술관의 어린이 대상 미술교육 프로그램이 전국 공립미술관 우수 교육 프로그램 공모전에서 대상을 수상했습니다.", date: "2024-05-28", image: mindLandscapeImg }
   ],
   updates: [
     { id: 201, title: "새로운 현대미술 전시회가 이번 주 금요일부터 시작됩니다.", date: "2024-06-12" },

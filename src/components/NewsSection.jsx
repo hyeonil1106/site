@@ -9,6 +9,10 @@ import newsLectureImg from '../assets/news_lecture.png';
 import newsKidsImg from '../assets/news_kids.png';
 import timeFlowImg from '../assets/time_flow.png';
 import colorSpaceImg from '../assets/color_space.png';
+import starryNightImg from '../assets/starry_night.png';
+import mindLandscapeImg from '../assets/mind_landscape.png';
+import newsAwardImg from '../assets/news_award.png';
+import newsBuildingImg from '../assets/news_building.png';
 
 const newsData = [
   {
@@ -41,7 +45,7 @@ const newsData = [
     desc: "수원시립미술관이 문화체육관광부 주관 2024 우수 공공미술관으로 선정되었습니다.",
     date: "2024-05-30",
     hasImage: true,
-    image: colorSpaceImg,
+    image: newsAwardImg,
   },
 ];
 
@@ -52,7 +56,7 @@ const pressData = [
     desc: "수원시립미술관에서 열리는 '별 헤는 밤' 기획전이 관람객들 사이에서 큰 호평을 받고 있습니다.",
     date: "2024-06-18",
     hasImage: true,
-    image: pressEcoImg,
+    image: starryNightImg,
   },
   {
     id: 2,
@@ -60,7 +64,7 @@ const pressData = [
     desc: "수원시가 시립미술관 신관 건립을 위한 부지 확보 및 설계 공모를 본격적으로 추진한다고 밝혔습니다.",
     date: "2024-06-05",
     hasImage: true,
-    image: timeFlowImg,
+    image: newsBuildingImg,
   },
   {
     id: 3,
@@ -68,7 +72,7 @@ const pressData = [
     desc: "수원시립미술관의 어린이 대상 미술교육 프로그램이 전국 공립미술관 우수 교육 프로그램 공모전에서 대상을 수상했습니다.",
     date: "2024-05-28",
     hasImage: true,
-    image: newsKidsImg,
+    image: mindLandscapeImg,
   },
   {
     id: 4,
@@ -76,7 +80,7 @@ const pressData = [
     desc: "수원시립미술관이 개관 이래 최초로 연간 관람객 20만명을 돌파하는 기록을 세웠습니다.",
     date: "2024-05-15",
     hasImage: true,
-    image: newsGalleryImg,
+    image: colorSpaceImg,
   },
 ];
 
