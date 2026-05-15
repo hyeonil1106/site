@@ -179,7 +179,7 @@
   flex-direction: row;
   gap: 6px;
   padding: 8px 12px;
-  border: 1px solid #efefef;
+  border: 1px solid #b8b8b8;
   border-radius: var(--radius-large);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
