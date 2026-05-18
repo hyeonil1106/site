@@ -1,0 +1,295 @@
+[
+  {
+    "id": "aria-allowed-role",
+    "impact": "minor",
+    "tags": [
+      "cat.aria",
+      "best-practice"
+    ],
+    "description": "Ensure role attribute has an appropriate value for the element",
+    "help": "ARIA role should be appropriate for the element",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-allowed-role?application=playwright",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "aria-allowed-role",
+            "data": [
+              "dialog"
+            ],
+            "relatedNodes": [],
+            "impact": "minor",
+            "message": "ARIA role dialog is not allowed for given element"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "minor",
+        "html": "<aside class=\"menu-drawer-content \" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"menu-drawer-title\">",
+        "target": [
+          ".menu-drawer-content"
+        ],
+        "failureSummary": "Fix any of the following:\n  ARIA role dialog is not allowed for given element"
+      }
+    ]
+  },
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#9ca3af",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.53,
+              "fontSize": "9.8pt (13px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<section class=\"exhibition-section\" aria-labelledby=\"exhibition-heading\">",
+                "target": [
+                  ".exhibition-section"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p class=\"card-period\">2024.12.01 ~ 2024.12.31</p>",
+        "target": [
+          ".slider-item:nth-child(1) > .exhibition-card > .card-content > .card-period"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#9ca3af",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.53,
+              "fontSize": "9.8pt (13px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<section class=\"exhibition-section\" aria-labelledby=\"exhibition-heading\">",
+                "target": [
+                  ".exhibition-section"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p class=\"card-period\">2024.11.20 ~ 2024.12.20</p>",
+        "target": [
+          ".slider-item:nth-child(2) > .exhibition-card > .card-content > .card-period"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#9ca3af",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.53,
+              "fontSize": "9.8pt (13px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<section class=\"exhibition-section\" aria-labelledby=\"exhibition-heading\">",
+                "target": [
+                  ".exhibition-section"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p class=\"card-period\">2024.12.05 ~ 2025.01.10</p>",
+        "target": [
+          ".slider-item:nth-child(3) > .exhibition-card > .card-content > .card-period"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.53 (foreground color: #9ca3af, background color: #ffffff, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#999999",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.84,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"news-item\">",
+                "target": [
+                  ".news-item:nth-child(1)"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<time class=\"news-date\" datetime=\"2024-06-20\">2024-06-20</time>",
+        "target": [
+          "time[datetime=\"2024-06-20\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#999999",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.84,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"news-item\">",
+                "target": [
+                  ".news-item:nth-child(2)"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<time class=\"news-date\" datetime=\"2024-06-10\">2024-06-10</time>",
+        "target": [
+          "time[datetime=\"2024-06-10\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#999999",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.84,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"news-item\">",
+                "target": [
+                  ".news-item:nth-child(3)"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<time class=\"news-date\" datetime=\"2024-06-15\">2024-06-15</time>",
+        "target": [
+          "time[datetime=\"2024-06-15\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#999999",
+              "bgColor": "#ffffff",
+              "contrastRatio": 2.84,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "bold",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<article class=\"news-item\">",
+                "target": [
+                  ".news-item:nth-child(4)"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<time class=\"news-date\" datetime=\"2024-05-30\">2024-05-30</time>",
+        "target": [
+          "time[datetime=\"2024-05-30\"]"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #999999, background color: #ffffff, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  }
+]

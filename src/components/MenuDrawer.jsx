@@ -27,7 +27,7 @@ const MenuDrawer = ({ isOpen, onClose, onAlert }) => {
 
   return (
     <div className={`menu-drawer-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
-      <aside 
+      <div 
         className={`menu-drawer-content ${isOpen ? 'active' : ''}`} 
         onClick={(e) => e.stopPropagation()}
         role="dialog"
@@ -276,7 +276,7 @@ const MenuDrawer = ({ isOpen, onClose, onAlert }) => {
           </div>
 
         </div>
-      </aside>
+      </div>
     </div>
   );
 };
