@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ReservationModal.css';
 import imgDown from '../assets/down.png'
 
 const ReservationModal = ({ isOpen, onClose, exhibitionTitle }) => {
+  const navigate = useNavigate();
   // 캘린더 현재 날짜 상태
   const [currentYear, setCurrentYear] = useState(2026);
   const [currentMonth, setCurrentMonth] = useState(4);
@@ -252,7 +254,10 @@ const ReservationModal = ({ isOpen, onClose, exhibitionTitle }) => {
             <button 
               type="button" 
               className="btn-modal-go-main" 
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                navigate('/');
+              }}
             >
               메인 페이지로 넘어가기
             </button>
