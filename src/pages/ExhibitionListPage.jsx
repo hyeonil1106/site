@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ReservationModal from '../components/ReservationModal'; // 메인 페이지와 동일한 모달 임포트
 import './ExhibitionListPage.css';
+
+// 소장품 데이터 임포트
+import { COLLECTION_DATA } from '../components/CollectionSection';
 
 // 이미지 자산 임포트
 import starryNightImg from '../assets/starry_night.png';
@@ -47,18 +50,29 @@ const ALL_DATA = {
   online: [
     { id: 301, title: "메타 버추얼 뮤지엄", desc: "가상현실 공간에서 만나는 신감각 현대 미디어 전시", period: "상시 운영", image: cyberArtImg },
     { id: 302, title: "온라인 컬렉션 아카이브", desc: "수원시립미술관 주요 소장품의 인터랙티브 웹 회화전", period: "상시 운영", image: newsGalleryImg },
-  ]
+  ],
+  collection: COLLECTION_DATA
 };
 
 const ExhibitionListPage = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('current');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab') || 'current';
+
+  const [activeTab, setActiveTab] = useState(tabParam);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); // 화면 폭에 따라 동적 변동
 
   // 모달 제어 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedExhibitionTitle, setSelectedExhibitionTitle] = useState('');
+
+  // 외부 파라미터 변화 감지하여 activeTab 변경
+  useEffect(() => {
+    if (tabParam && ALL_DATA[tabParam]) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
 
   // 1. 화면 폭 감지 및 itemsPerPage 동적 설정 로직
   useEffect(() => {
@@ -128,10 +142,11 @@ const ExhibitionListPage = () => {
       {/* Figma 탭 메뉴바 */}
       <nav className="sub-tab-navigation">
         <ul className="tab-list">
-          <li className={activeTab === 'current' ? 'active' : ''} onClick={() => setActiveTab('current')}>현재전시</li>
-          <li className={activeTab === 'upcoming' ? 'active' : ''} onClick={() => setActiveTab('upcoming')}>예정전시</li>
-          <li className={activeTab === 'past' ? 'active' : ''} onClick={() => setActiveTab('past')}>지난전시</li>
-          <li className={activeTab === 'online' ? 'active' : ''} onClick={() => setActiveTab('online')}>온라인전시</li>
+          <li className={activeTab === 'current' ? 'active' : ''} onClick={() => setSearchParams({ tab: 'current' })}>현재전시</li>
+          <li className={activeTab === 'upcoming' ? 'active' : ''} onClick={() => setSearchParams({ tab: 'upcoming' })}>예정전시</li>
+          <li className={activeTab === 'past' ? 'active' : ''} onClick={() => setSearchParams({ tab: 'past' })}>지난전시</li>
+          <li className={activeTab === 'online' ? 'active' : ''} onClick={() => setSearchParams({ tab: 'online' })}>온라인전시</li>
+          <li className={activeTab === 'collection' ? 'active' : ''} onClick={() => setSearchParams({ tab: 'collection' })}>미술관 소장품</li>
         </ul>
       </nav>
 
@@ -145,10 +160,25 @@ const ExhibitionListPage = () => {
                   <img src={item.image} alt={item.title} loading="lazy" />
                 </div>
                 <div className="card-info-box">
-                  <h3 className="card-title">{item.title}</h3>
+                  <h3 className="card-title">
+                    {activeTab === 'collection' ? `[소장품] ${item.title}` : item.title}
+                  </h3>
+                  {activeTab === 'collection' && (
+                    <p className="card-artist" style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '8px' }}>
+                      작가: {item.artist}
+                    </p>
+                  )}
                   <p className="card-desc">{item.desc}</p>
-                  <p className="card-period">{item.period}</p>
-                  {activeTab !== 'past' && activeTab !== 'online' ? (
+                  <p className="card-period">{activeTab === 'collection' ? item.info : item.period}</p>
+                  {activeTab === 'collection' ? (
+                    <button 
+                      type="button" 
+                      className="btn-card-booking"
+                      onClick={() => alert(`[${item.title}] 작품의 디지털 도슨트 해설 및 고해상도 아카이브 뷰어는 현재 준비 중입니다.`)}
+                    >
+                      작품 설명보기
+                    </button>
+                  ) : activeTab !== 'past' && activeTab !== 'online' ? (
                     <button 
                       type="button" 
                       className="btn-card-booking"

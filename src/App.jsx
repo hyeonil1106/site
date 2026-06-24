@@ -16,6 +16,7 @@ import ReservationModal from './components/ReservationModal';
 // ★ 신규 서브페이지 컴포넌트 임포트
 import ExhibitionListPage from './pages/ExhibitionListPage';
 import NewsListPage from './pages/NewsListPage'; // 신규 임포트 완료
+import CollectionSection from './components/CollectionSection';
 
 // [도우미] 페이지 이동 시 최상단 스크롤 보증 모듈
 function ScrollToTop() {
@@ -53,6 +54,7 @@ function App() {
                   <NoticeBanner />
                   <MainVisual onOpenReservation={() => openReservation('시간의 정원')} />
                   <ExhibitionSection onOpenReservation={openReservation} />
+                  <CollectionSection />
                   <NewsSection />
                   <DirectionsSection />
                 </main>

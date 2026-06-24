@@ -11,12 +11,13 @@ import logoImg from '../assets/logo.png';
 const MENU_DATA = [
   {
     title: '전시',
-    path: '/exhibitions', // 수정: 이전에 추가했던 전시 리스트 주소 매핑
+    path: '/exhibitions',
     subItems: [
-      { label: '현재전시', href: '/exhibitions' },
-      { label: '예전전시', href: '/exhibitions' },
-      { label: '지난전시', href: '/exhibitions' },
-      { label: '온라인전시', href: '/exhibitions' },
+      { label: '현재전시', href: '/exhibitions?tab=current' },
+      { label: '예정전시', href: '/exhibitions?tab=upcoming' },
+      { label: '지난전시', href: '/exhibitions?tab=past' },
+      { label: '온라인전시', href: '/exhibitions?tab=online' },
+      { label: '미술관 소장품', href: '/exhibitions?tab=collection' },
     ],
   },
   {

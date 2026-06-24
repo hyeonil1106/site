@@ -1,0 +1,193 @@
+/* =====================================================
+   수원시립미술관 소장품 섹션 (Collection Section) CSS
+   ===================================================== */
+
+.collection-section {
+  padding: 80px 16px;
+  background-color: var(--color-bg-white);
+  border-top: 1px solid var(--color-bg-light);
+}
+
+.collection-section .section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collection-section-title {
+  font-size: 32px;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-primary); /* 브랜드 남색 */
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.collection-section-desc {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 48px auto;
+  line-height: 1.6;
+}
+
+/* 반응형 그리드 - 모바일 기본: 1열 */
+.collection-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+/* 프리미엄 컬렉션 미술 카드 */
+.collection-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  height: 100%;
+}
+
+.collection-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-primary); /* 호버 시 남색 테두리 */
+  box-shadow: 0 15px 35px rgba(0, 31, 63, 0.08); /* 남색 틴트를 입힌 세련된 섀도우 */
+}
+
+/* 카드 이미지 박스 */
+.collection-card-image-box {
+  width: 100%;
+  aspect-ratio: 16 / 11; /* 정갈하고 회화적인 비율 */
+  overflow: hidden;
+  position: relative;
+  background-color: #f3f4f6;
+}
+
+.collection-card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.collection-card:hover .collection-card-image-box img {
+  transform: scale(1.05); /* 마우스 호버 시 작품 이미지 미세 확대 */
+}
+
+/* 작가 이름 뱃지 - 골드 포인트 */
+.collection-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+/* 카드 텍스트 정보 영역 */
+.collection-card-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.collection-card-title {
+  font-size: 19px;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-primary); /* 브랜드 남색 */
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.collection-card-info {
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+  color: #718096; /* 미세 회색조 */
+  margin-bottom: 16px;
+  border-left: 2.5px solid var(--color-accent); /* 골드 리딩 세로선 추가 */
+  padding-left: 8px;
+}
+
+.collection-card-desc {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  flex: 1;
+  word-break: keep-all;
+}
+
+/* 소장품 전체보기 액션 영역 */
+.collection-more-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.collection-more-btn {
+  min-width: 220px;
+  padding: 14px 28px;
+  border-radius: var(--radius-large);
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  border: 1.5px solid var(--color-primary);
+  background-color: transparent;
+  color: var(--color-primary);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.collection-more-btn .arrow-icon {
+  transition: transform 0.2s ease;
+}
+
+.collection-more-btn:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 4px 15px rgba(0, 31, 63, 0.15);
+}
+
+.collection-more-btn:hover .arrow-icon {
+  transform: translateX(4px); /* 화살표가 오른쪽으로 슬라이드 인 애니메이션 */
+}
+
+/* =====================================================
+   ★ 반응형 분기점 (Figma 시안 최적화 대응)
+   ===================================================== */
+
+/* A. 태블릿 뷰 (768px 이상) */
+@media (min-width: 768px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2열 레이아웃 */
+    gap: 32px;
+  }
+  
+  .collection-section {
+    padding: 100px 24px;
+  }
+}
+
+/* B. 데스크톱 뷰 (1024px 이상) */
+@media (min-width: 1024px) {
+  .collection-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3열 레이아웃 */
+    gap: 36px;
+  }
+  
+  .collection-section-title {
+    font-size: 38px;
+  }
+}
