@@ -63,7 +63,7 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: var(--color-primary);
+  background-color: var(--color-accent); /* 활성화 탭은 금색 포인트 */
   border-radius: 2px;
 }
 
@@ -211,9 +211,9 @@
 
 .more-btn:hover,
 .more-btn:focus-visible {
-  background-color: #888888;
+  background-color: var(--color-primary);
   color: #ffffff;
-  border-color: #ffffff;
+  border-color: var(--color-primary);
 }
 
 /* ===================================

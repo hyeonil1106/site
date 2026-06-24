@@ -245,7 +245,7 @@
 }
 
 .picker-month-btn.compact.active {
-  background-color: #222222;
+  background-color: var(--color-primary);
   color: var(--color-white);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: scale(1.02);
@@ -319,8 +319,9 @@
 }
 
 .day-cell-btn.active {
-  background-color: #111111;
-  color: var(--color-white);
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
 }
 
 /* 6. 관람 인원 카운터 영역 */
@@ -403,8 +404,8 @@
 
 .time-pill-btn {
   background-color: #ffffff; /* 기본: 흰색 버튼 */
-  color: #111111; /* 기본: 검은색 글자 */
-  border: 1px solid #111111; /* 기본: 검은색 테두리 */
+  color: var(--color-primary); /* 기본: 남색 글자 */
+  border: 1px solid var(--color-primary); /* 기본: 남색 테두리 */
   border-radius: 30px;
   padding: 10px 0;
   font-size: 14px;
@@ -416,13 +417,13 @@
 
 .time-pill-btn:hover {
   transform: translateY(-1px);
-  background-color: #f0f2f5;
+  background-color: rgba(0, 31, 63, 0.05);
 }
 
 .time-pill-btn.active {
-  background-color: #111111; /* 클릭 시: 검은색 배경 */
+  background-color: var(--color-primary); /* 클릭 시: 남색 배경 */
   color: #ffffff; /* 클릭 시: 흰색 글자 */
-  border-color: #111111;
+  border-color: var(--color-primary);
   transform: scale(0.95);
 }
 
@@ -455,7 +456,7 @@
 
 .btn-booking-submit {
   width: 100%;
-  background-color: #111111; /* 연회색에서 최종 검은색 배경으로 승급 */
+  background-color: var(--color-primary); /* 최종 남색 배경 */
   border: none;
   padding: 20px;
   font-size: 18px;
@@ -467,11 +468,11 @@
 }
 
 .btn-booking-submit:hover {
-  background-color: #333333; /* 호버 시 소프트 다크 그레이 반응 */
+  background-color: var(--color-primary-light); /* 호버 시 밝은 남색 반응 */
 }
 
 .btn-booking-submit:active {
-  background-color: #000000;
+  background-color: #001124;
   transform: scale(0.99);
 }
 
@@ -513,7 +514,7 @@
 
 .btn-modal-go-main {
   width: 100%;
-  background-color: #111111; /* 최종 관람예약 버튼과 똑같은 블랙 스타일 적용 */
+  background-color: var(--color-primary); /* 브랜드 남색 */
   border: none;
   padding: 16px;
   font-size: 16px;
@@ -526,7 +527,7 @@
 }
 
 .btn-modal-go-main:hover {
-  background-color: #333333; /* 호버 시 부드러운 다크 그레이 인터랙션 */
+  background-color: var(--color-primary-light); /* 호버 시 밝은 남색 반응 */
 }
 
 .btn-modal-go-main:active {

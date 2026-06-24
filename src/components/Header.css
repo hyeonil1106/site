@@ -92,7 +92,7 @@
 /* 호버 혹은 드롭다운 오픈(is-active) 시 강조 효과 */
 .top-menu-item:hover,
 .top-menu-item-wrapper.is-active .top-menu-item {
-  background-color: #111111;
+  background-color: var(--color-primary);
   color: #fff;
 }
 
@@ -152,7 +152,7 @@
 /* 펼쳐진 목록 내부 서브 항목 호버 */
 .submenu-link:hover,
 .submenu-link:focus-visible {
-  background-color: #111111;
+  background-color: var(--color-primary);
   color: #ffffff;
   font-weight: var(--font-weight-bold);
 }
@@ -160,8 +160,8 @@
 /* Figma 특유의 높이 맞춤용 다크 네이비 마감 블록 */
 .submenu-filler-block {
   width: 100%;
-  background-color: #222; /* 은은하고 차분한 피그마 풍 다크 네이비 */
-  border-top: 1px solid #222;
+  background-color: var(--color-primary); /* 브랜드 남색 */
+  border-top: 2px solid var(--color-accent); /* 세련된 골드 보더라인 마감 */
 }
 
 /* ========================================== */

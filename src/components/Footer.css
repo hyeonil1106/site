@@ -1,8 +1,8 @@
 .footer-section {
   padding: 60px 20px; /* 푸터 안정감을 위해 패딩 소폭 확장 */
-  border-top: 1px solid #222222;
-  background-color: #111111; /* 푸터 색상의 어둡기 대폭 하향 조절 (고급 다크 테마) */
-  color: #888888; /* 어두운 배경에 대응하는 차분한 텍스트 명도 */
+  border-top: 2px solid var(--color-accent); /* 고급스러운 골드 탑 라인 */
+  background-color: var(--color-primary); /* 브랜드 남색 배경 */
+  color: rgba(255, 255, 255, 0.7); /* 텍스트 시인성 개선 */
   font-size: var(--font-size-caption);
   text-align: center;
 }
@@ -16,14 +16,14 @@
 }
 
 .footer-links a {
-  color: #e2e8f0; /* 다크 푸터에 가독성 좋은 은빛 그레이 부여 */
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-weight: var(--font-weight-semibold);
   transition: color 0.2s ease;
 }
 
 .footer-links a:hover, .footer-links a:focus-visible {
-  color: #ffffff; /* 호버 피드백 극대화 */
+  color: var(--color-accent); /* 호버 시 금색으로 반짝이는 피드백 */
   text-decoration: underline;
 }
 
